@@ -6,11 +6,17 @@ If you want to learn more about Quarkus, please visit its website: https://quark
 
 ## Running the application in dev mode
 
+Run jaeger 
+```
+docker run -p 5775:5775/udp -p 6831:6831/udp -p 6832:6832/udp -p 5778:5778 -p 16686:16686 -p 14268:14268 jaegertracing/all-in-one:latest
+```
+
 You can run your application in dev mode that enables live coding using:
 ```
 ./mvnw quarkus:dev
 ```
-
+access to the swagger
+http://localhost:8083/q/swagger-ui
 ## Packaging and running the application
 
 The application can be packaged using `./mvnw package`.
