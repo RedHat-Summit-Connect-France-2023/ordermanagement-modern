@@ -1,12 +1,15 @@
 package io.ordermanagement.inventory.controller;
 
+import java.net.URI;
 import java.util.Arrays;
 import java.util.List;
 
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
+import jakarta.transaction.Transactional;
 import jakarta.ws.rs.DefaultValue;
 import jakarta.ws.rs.GET;
+import jakarta.ws.rs.POST;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
@@ -58,6 +61,13 @@ public class ProductController {
         Sort sort = getSortFromQuery(sortString);
         return Response.ok(productService.findAll(page, sort)).build();
 	}
+
+	@POST
+    @Transactional
+    public Response create(Product product) {
+        product.persist();
+        return Response.created(URI.create("/products/" + product.getItemId())).build();
+    }
 
 	/**
 	 * This method tries to mimic the behavior of Spring MVC's @EnableSpringDataWebSupport annotation when it comes to the sort parameter.

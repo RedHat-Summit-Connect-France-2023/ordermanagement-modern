@@ -55,9 +55,6 @@ public class ProductServiceTest {
 		assertThat(p.getQuantity(), equalTo(20));
 		assertThat(p.getLink(), equalTo("http://localhost:8080/test"));
 
-
-
-
 	}
 	
 	@Test
@@ -68,5 +65,7 @@ public class ProductServiceTest {
 		Product p = service.findById("2");
 		assertThat(p, is(nullValue()));
 	}
+
+	
 	
 }
