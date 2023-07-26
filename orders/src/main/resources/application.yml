@@ -6,7 +6,7 @@ quarkus:
   kubernetes-config:
     enabled: true
     config-maps:
-      - inventory-config
+      - orders-config
   hibernate-orm:
     database:
       generation: drop-and-create
