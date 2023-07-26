@@ -13,29 +13,31 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
-
+import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
+import io.quarkus.runtime.annotations.RegisterForReflection;
 @Entity
 @Table(name = "orders")
-public class Order implements Serializable {
+@RegisterForReflection
+public class Order extends PanacheEntityBase {
 
 	private static final long serialVersionUID = -1L;
 
 	@Id
 	@GeneratedValue
 	private long orderId;
-
+	@Column(length = 255)
 	private String customerName;
-
+	@Column(length = 255)
 	private String customerEmail;
-
+	@Column
 	private double orderValue;
-
+	@Column
 	private double retailPrice;
-
+	@Column
 	private double discount;
-
+	@Column
 	private double shippingFee;
-
+	@Column
 	private double shippingDiscount;
 
 	@Column(name="TOTAL_PRICE")
@@ -45,7 +47,6 @@ public class Order implements Serializable {
 	@JoinColumn(name="ORDER_ID")
 	private List<OrderItem> itemList = new ArrayList<>();
 
-	public Order() {}
 
 	public long getOrderId() {
 		return orderId;

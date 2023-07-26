@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package io.ordermanagement.inventory.exception;
+package io.ordermanagement.order.exception;
 
 public class ResourceNotFoundException extends RuntimeException {
 

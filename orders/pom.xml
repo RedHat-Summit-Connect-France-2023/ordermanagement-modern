@@ -100,11 +100,11 @@
         <executions>
           <execution>
             <goals>
-              <!--goal>build</goal>
+              <goal>build</goal>
               <goal>generate-code</goal>
-              <goal>generate-code-tests</goal-->
-              <goal>integration-test</goal>
-              <goal>verify</goal>
+              <goal>generate-code-tests</goal>
+              <!-- <goal>integration-test</goal>
+              <goal>verify</goal> -->
             </goals>
           </execution>
         </executions>

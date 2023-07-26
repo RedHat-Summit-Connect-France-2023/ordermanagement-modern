@@ -16,12 +16,12 @@ quarkus:
     username: connect23
     password: connect23
     jdbc:
-      url: jdbc:postgresql://postgresql-ordermgmt:5432/ordermgmt-db
+      url: jdbc:postgresql://localhost:5432/ordermgmt-db
 
   log:
     level: DEBUG
     category:
-      "io.ordermanagement":
+      "io.ordermanagement.order":
         level: DEBUG
   jaeger:
     endpoint: http://localhost:14268/api/traces
@@ -38,13 +38,18 @@ quarkus:
 "%dev":
   quarkus:
     http:
-      port: 8083
+      port: 8084
     kubernetes-config:
       enabled: false
     datasource:
-      db-kind: h2
+      # db-kind: h2
+      # jdbc:
+      #   url: jdbc:h2:mem:inventory;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+      username: connect23
+      password: connect23
+      db-kind: postgresql
       jdbc:
-        url: jdbc:h2:mem:inventory;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+        url: jdbc:postgresql://localhost:5432/ordermgmt-db
 
 
 "%test":

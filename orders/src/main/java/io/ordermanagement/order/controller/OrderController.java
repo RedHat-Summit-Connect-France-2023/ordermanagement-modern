@@ -1,4 +1,4 @@
-package io.ordermanagement.inventory.controller;
+package io.ordermanagement.order.controller;
 
 import java.net.URI;
 import java.util.Arrays;
@@ -21,8 +21,8 @@ import org.eclipse.microprofile.opentracing.Traced;
 import org.jboss.logging.Logger;
 
 import io.opentracing.Tracer;
-import io.ordermanagement.inventory.model.Order;
-import io.ordermanagement.inventory.service.IOrderService;
+import io.ordermanagement.order.model.Order;
+import io.ordermanagement.order.service.IOrderService;
 import io.quarkus.panache.common.Page;
 import io.quarkus.panache.common.Sort;
 
@@ -46,10 +46,10 @@ public class OrderController {
 		Order o;
 		logger.debug("Entering OrderController.getById()");
 		o = orderService.findById(id);
-		if (p == null) {
+		if (o == null) {
 			logger.error("Order not found");
 		}
-		return p;    
+		return o;    
     }
 	
 	@GET
@@ -59,14 +59,14 @@ public class OrderController {
             @QueryParam("size") @DefaultValue("20") int pageSize) {
 		Page page = Page.of(pageIndex, pageSize);
         Sort sort = getSortFromQuery(sortString);
-        return Response.ok(OrderService.findAll(page, sort)).build();
+        return Response.ok(orderService.findAll(page, sort)).build();
 	}
 
 	@POST
     @Transactional
     public Response create(Order order) {
         order.persist();
-        return Response.created(URI.create("/orders/" + order.getId())).build();
+        return Response.created(URI.create("/orders/" + order.getOrderId())).build();
     }
 
 	/**

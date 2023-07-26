@@ -1,6 +1,6 @@
-package io.ordermanagement.inventory.exception.handler;
+package io.ordermanagement.order.exception.handler;
 
-import io.ordermanagement.inventory.exception.ResourceNotFoundException;
+import io.ordermanagement.order.exception.ResourceNotFoundException;
 import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.core.Response.Status;
 import jakarta.ws.rs.ext.ExceptionMapper;

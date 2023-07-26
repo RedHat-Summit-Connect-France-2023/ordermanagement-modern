@@ -1,0 +1,32 @@
+version: '3.3'
+volumes:
+  postgres_data:
+      driver: local
+services:
+  db:
+      image: postgres:13.3-alpine
+      container_name: postgres
+      ports:
+      - "5432:5432"
+      volumes:
+        - ./data/db:/var/lib/postgresql/data
+      environment:
+        - POSTGRES_USER=connect23
+        - POSTGRES_PASSWORD=connect23
+        - POSTGRES_DB=ordermgmt-db
+      networks:
+      - ordermgmt-network
+  jaeger:
+    image: jaegertracing/all-in-one:latest
+    ports:
+      - "16686:16686"
+      - "14268:14268"
+      - "5778:5778"
+    environment:
+      - COLLECTOR_OTLP_ENABLED=true
+      - LOG_LEVEL=debug
+    networks:
+      - ordermgmt-network
+networks:
+  ordermgmt-network:
+    driver: bridge
