@@ -1,0 +1,6 @@
+{
+  "MONOLITH": false,
+  "API_ENDPOINT": "localhost:8083",
+  "SECURE_API_ENDPOINT": "localhost:8083",
+  "SSO_ENABLED": false
+}

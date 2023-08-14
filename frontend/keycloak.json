@@ -1,0 +1,7 @@
+{
+    "realm": "master",
+    "auth-server-url": "http://localhost:8180/auth",
+    "ssl-required": "external",
+    "resource": "ordermgmt-demo",
+    "public-client": true
+}
