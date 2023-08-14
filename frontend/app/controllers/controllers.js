@@ -32,6 +32,8 @@ angular.module('app')
 
                 // initialize products
                 catalog.getProducts().then(function (data) {
+
+                    console.log("product called from Controller ",data)
                     $scope.products = data.map(function (el) {
                         return {
                             quantity: "1",

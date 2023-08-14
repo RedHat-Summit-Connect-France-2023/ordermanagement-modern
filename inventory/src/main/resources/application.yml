@@ -38,6 +38,11 @@ quarkus:
 "%dev":
   quarkus:
     http:
+      cors:
+        ~: true
+        origins: '*'
+        headers: accept, authorization, content-type, x-requested-with
+        methods: GET, OPTIONS, POST
       port: 8083
     kubernetes-config:
       enabled: false

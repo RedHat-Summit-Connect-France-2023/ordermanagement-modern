@@ -1,14 +1,20 @@
 var express = require('express');
-const cors = require('cors');
-var app = express();
+const app = express();
+const http = require('http');
+const path = require('path');
+const port = process.env.PORT || 8080;
 
-app.use(express.static("app")); // myApp will be the same folder name.
-const corsMiddleware = cors();
-app.use(function(req, res, next) {
-    corsMiddleware(req, res, next);
-});
-app.get('/', function (req, res,next) {
- res.redirect('/'); 
-});
-app.listen(8080, 'localhost');
-console.log("frontend Server is Listening on port 8080");
+app.use(express.static(__dirname + '/app'));
+
+//const corsMiddleware = cors();
+/* app.use(function(req, res, next) {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    next()
+}); */
+
+
+app.get('/*', (req, res) => res.sendFile(path.join(__dirname)));
+
+const server = http.createServer(app);
+
+server.listen(8080, () => console.log(`App running on: http://localhost:${port}`));
