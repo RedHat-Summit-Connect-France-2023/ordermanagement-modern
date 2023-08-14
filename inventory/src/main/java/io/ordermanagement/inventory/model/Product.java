@@ -12,7 +12,7 @@ import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 import io.quarkus.runtime.annotations.RegisterForReflection;
 
 @Entity
-@Table(name = "inventory",uniqueConstraints = @UniqueConstraint(columnNames = "itemId"))
+@Table(name = "products",uniqueConstraints = @UniqueConstraint(columnNames = "itemId"))
 @RegisterForReflection
 public class Product extends PanacheEntityBase {
 	
