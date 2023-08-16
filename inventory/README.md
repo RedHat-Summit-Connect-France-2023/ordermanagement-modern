@@ -6,9 +6,15 @@ If you want to learn more about Quarkus, please visit its website: https://quark
 
 ## Running the application in dev mode
 
-Run jaeger 
+if you want to run jaeger alone (you have to run postgresql also)
 ```
 docker run -p 5775:5775/udp -p 6831:6831/udp -p 6832:6832/udp -p 5778:5778 -p 16686:16686 -p 14268:14268 jaegertracing/all-in-one:latest
+```
+Run jaeger and postgresql
+
+```
+cd docker-compose
+docker-compose up
 ```
 
 You can run your application in dev mode that enables live coding using:
@@ -17,6 +23,16 @@ You can run your application in dev mode that enables live coding using:
 ```
 access to the swagger
 http://localhost:8083/q/swagger-ui
+
+delete docker containers
+```
+docker-compose rm -f
+```
+
+> **_NOTE:_**  Quarkus now ships with a Dev UI, which is available in dev mode only at http://localhost:8083/q/dev/.
+
+
+
 ## Packaging and running the application
 
 The application can be packaged using `./mvnw package`.
