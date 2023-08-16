@@ -10,12 +10,12 @@ import org.jboss.logging.Logger;
 import io.opentracing.Span;
 import io.opentracing.Tracer;
 import io.ordermanagement.order.model.Order;
-import io.quarkus.hibernate.orm.panache.PanacheRepository;
+import io.quarkus.hibernate.orm.panache.PanacheRepositoryBase;
 import io.quarkus.panache.common.Page;
 import io.quarkus.panache.common.Sort;
 
 @ApplicationScoped
-public class OrderRepository implements PanacheRepository<Order> {
+public class OrderRepository implements PanacheRepositoryBase<Order, Long> {
 
 	private static Logger logger = Logger.getLogger( OrderRepository.class.getName() );
 	

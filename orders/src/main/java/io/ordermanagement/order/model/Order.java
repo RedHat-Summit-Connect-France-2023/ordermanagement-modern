@@ -1,6 +1,5 @@
 package io.ordermanagement.order.model;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,22 +8,24 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import io.quarkus.hibernate.orm.panache.PanacheEntity;
 import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 import io.quarkus.runtime.annotations.RegisterForReflection;
 @Entity
 @Table(name = "orders")
 @RegisterForReflection
-public class Order extends PanacheEntityBase {
+public class Order extends PanacheEntityBase{
 
-	private static final long serialVersionUID = -1L;
 
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long orderId;
+	
 	@Column(length = 255)
 	private String customerName;
 	@Column(length = 255)
@@ -40,12 +41,11 @@ public class Order extends PanacheEntityBase {
 	@Column
 	private double shippingDiscount;
 
-	@Column(name="TOTAL_PRICE")
+	@Column(name="total_price")
 
 	
-	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
-	@JoinColumn(name="ORDER_ID")
-	private List<OrderItem> itemList = new ArrayList<>();
+	@OneToMany(mappedBy="order", fetch = FetchType.EAGER, orphanRemoval = true)
+	public List<OrderItem> itemList;
 
 
 	public long getOrderId() {

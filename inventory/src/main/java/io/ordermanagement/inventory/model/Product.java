@@ -1,5 +1,6 @@
 package io.ordermanagement.inventory.model;
 
+import jakarta.json.bind.annotation.JsonbTransient;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -16,7 +17,8 @@ import io.quarkus.runtime.annotations.RegisterForReflection;
 @RegisterForReflection
 public class Product extends PanacheEntityBase {
 	
-	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+    @JsonbTransient
 	private String itemId;
 	
 	@Column(length = 60)

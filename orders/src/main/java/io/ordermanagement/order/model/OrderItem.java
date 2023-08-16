@@ -5,21 +5,21 @@ import java.io.Serializable;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.persistence.JoinColumn;
+import io.quarkus.hibernate.orm.panache.PanacheEntity;
 import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 import io.quarkus.runtime.annotations.RegisterForReflection;
 @Entity
 @Table(name = "order_items")
 @RegisterForReflection
-public class OrderItem  extends PanacheEntityBase{
+public class OrderItem extends PanacheEntityBase{
 	private static final long serialVersionUID = 64565445665456666L;
 
 	@Id
-	@Column(name="ID")
-	@GeneratedValue
 	private long id;
 
 	@ManyToOne(targetEntity = Order.class)
@@ -30,7 +30,7 @@ public class OrderItem  extends PanacheEntityBase{
 	@Column
 	private int quantity;
 
-	@Column(name = "product_itemId")
+	@Column(name = "productId")
 	private String productId;
 	@Column
 	private double price;
