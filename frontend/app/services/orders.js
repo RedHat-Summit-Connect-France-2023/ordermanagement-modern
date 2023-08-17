@@ -9,9 +9,9 @@ angular.module("app")
         baseUrl='/services';
     } else {
         if ($location.protocol() === 'https') {
-            baseUrl = (COOLSTORE_CONFIG.SECURE_API_ENDPOINT.startsWith("https://") ? COOLSTORE_CONFIG.SECURE_API_ENDPOINT : "https://" + COOLSTORE_CONFIG.SECURE_API_ENDPOINT + '.' + $location.host().replace(/^.*?\.(.*)/g,"$1")) + '/services';
+            baseUrl = (COOLSTORE_CONFIG.SECURE_API_ENDPOINT.startsWith("https://") ? COOLSTORE_CONFIG.SECURE_API_ENDPOINT : "https://" + COOLSTORE_CONFIG.SECURE_API_ENDPOINT);
         } else {
-            baseUrl = (COOLSTORE_CONFIG.API_ENDPOINT.startsWith("http://") ? COOLSTORE_CONFIG.API_ENDPOINT : "http://" + COOLSTORE_CONFIG.API_ENDPOINT + '.' + $location.host().replace(/^.*?\.(.*)/g,"$1")) + '/services';
+            baseUrl = (COOLSTORE_CONFIG.ORDER_API_ENDPOINT.startsWith("http://") ? COOLSTORE_CONFIG.ORDER_API_ENDPOINT : "http://" + COOLSTORE_CONFIG.ORDER_API_ENDPOINT);
         }
     }
 

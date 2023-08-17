@@ -1,0 +1,1 @@
+insert into shoppingcart(cartTotal,name) values (0,'MyCart');

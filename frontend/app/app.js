@@ -22,55 +22,55 @@ angular.element(document).ready(function () {
         console.log("response data ");
         console.log(response.data);
         module.constant("COOLSTORE_CONFIG", response.data);
-        if (!response.data.SSO_ENABLED) {
+       // if (!response.data.SSO_ENABLED) {
             angular.bootstrap(document, ["app"], {
                 strictDi: true
             });
-        } else {
-            auth.ssoEnabled = true;
-            var keycloakAuth = new Keycloak('keycloak.json');
-            auth.loggedIn = false;
+        // } else {
+        //     auth.ssoEnabled = true;
+        //     var keycloakAuth = new Keycloak('keycloak.json');
+        //     auth.loggedIn = false;
 
-            auth.login = function () {
-                keycloakAuth.login({
-                    loginHint: 'appuser'
-                });
-            };
+        //     auth.login = function () {
+        //         keycloakAuth.login({
+        //             loginHint: 'appuser'
+        //         });
+        //     };
 
-            keycloakAuth.init({
-                onLoad: 'login-required'
-            }).success(function () {
-                if (keycloakAuth.authenticated) {
-                    keycloakAuth.loadUserInfo().success(function (userInfo) {
-                        auth.userInfo = userInfo;
-                        angular.bootstrap(document, ["app"], {
-                            strictDi: true
-                        });
-                        auth.loggedIn = true;
-                        auth.authz = keycloakAuth;
-                        auth.logout = function () {
-                            auth.loggedIn = false;
-                            auth.authz = null;
-                            auth.userInfo = {};
-                            keycloakAuth.logout();
-                        };
-                    }).error(function () {
-                        angular.bootstrap(document, ["app"], {
-                            strictDi: true
-                        });
+        //     keycloakAuth.init({
+        //         onLoad: 'login-required'
+        //     }).success(function () {
+        //         if (keycloakAuth.authenticated) {
+        //             keycloakAuth.loadUserInfo().success(function (userInfo) {
+        //                 auth.userInfo = userInfo;
+        //                 angular.bootstrap(document, ["app"], {
+        //                     strictDi: true
+        //                 });
+        //                 auth.loggedIn = true;
+        //                 auth.authz = keycloakAuth;
+        //                 auth.logout = function () {
+        //                     auth.loggedIn = false;
+        //                     auth.authz = null;
+        //                     auth.userInfo = {};
+        //                     keycloakAuth.logout();
+        //                 };
+        //             }).error(function () {
+        //                 angular.bootstrap(document, ["app"], {
+        //                     strictDi: true
+        //                 });
 
-                    });
-                } else {
-                    angular.bootstrap(document, ["app"], {
-                        strictDi: true
-                    });
-                }
-            }).error(function (msg) {
-                angular.bootstrap(document, ["app"], {
-                    strictDi: true
-                });
-            });
-        }
+        //             });
+        //         } else {
+        //             angular.bootstrap(document, ["app"], {
+        //                 strictDi: true
+        //             });
+        //         }
+        //     }).error(function (msg) {
+        //         angular.bootstrap(document, ["app"], {
+        //             strictDi: true
+        //         });
+        //     });
+        // }
     });
 });
 

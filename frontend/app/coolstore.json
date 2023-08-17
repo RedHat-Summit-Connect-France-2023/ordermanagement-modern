@@ -1,6 +1,8 @@
 {
   "MONOLITH": false,
-  "API_ENDPOINT": "localhost:8083",
+  "CATALOG_API_ENDPOINT": "localhost:8083",
+  "ORDER_API_ENDPOINT": "localhost:8084",
+  "CART_API_ENDPOINT": "localhost:8085",
   "SECURE_API_ENDPOINT": "localhost:8083",
   "SSO_ENABLED": false
 }

@@ -38,6 +38,11 @@ quarkus:
 "%dev":
   quarkus:
     http:
+      cors:
+        ~: true
+        origins: '*'
+        headers: accept, authorization, content-type, x-requested-with
+        methods: GET, OPTIONS, POST      
       port: 8084
     kubernetes-config:
       enabled: false
@@ -50,8 +55,6 @@ quarkus:
         url: jdbc:postgresql://localhost:5432/ordermgmt-db
       username: connect23
       password: connect23
-
-
 "%test":
   quarkus:
     kubernetes-config:

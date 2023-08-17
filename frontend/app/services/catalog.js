@@ -11,9 +11,9 @@ angular.module("app")
 
 	} else {
 		if ($location.protocol() === 'https') {
-			baseUrl = (COOLSTORE_CONFIG.SECURE_API_ENDPOINT.startsWith("https://") ? COOLSTORE_CONFIG.SECURE_API_ENDPOINT : "https://" + COOLSTORE_CONFIG.SECURE_API_ENDPOINT ) + '/products';
+			baseUrl = (COOLSTORE_CONFIG.SECURE_API_ENDPOINT.startsWith("https://") ? COOLSTORE_CONFIG.SECURE_API_ENDPOINT : "https://" + COOLSTORE_CONFIG.SECURE_API_ENDPOINT );
 		} else {
-			baseUrl = (COOLSTORE_CONFIG.API_ENDPOINT.startsWith("http://") ? COOLSTORE_CONFIG.API_ENDPOINT : "http://" + COOLSTORE_CONFIG.API_ENDPOINT ) + '/products';
+			baseUrl = (COOLSTORE_CONFIG.CATALOG_API_ENDPOINT.startsWith("http://") ? COOLSTORE_CONFIG.API_ENDPOINT : "http://" + COOLSTORE_CONFIG.CATALOG_API_ENDPOINT );
 		}
 	}
 	console.log("CATALOG 2 : URL ",baseUrl);
@@ -29,7 +29,7 @@ angular.module("app")
 
             $http({
                 method: 'GET',
-				url: baseUrl
+				url: baseUrl + '/products'
             }).then(function(resp) {
 				console.log ("get product result ",resp)
 

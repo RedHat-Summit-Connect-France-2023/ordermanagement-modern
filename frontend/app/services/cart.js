@@ -6,12 +6,12 @@ angular.module("app")
 	var factory = {}, cart, products, cartId, baseUrl;
 	
 	if(!!COOLSTORE_CONFIG.MONOLITH) {
-		baseUrl='/services/cart';
+		baseUrl='/cart';
 	} else {
 		if ($location.protocol() === 'https') {
-			baseUrl = (COOLSTORE_CONFIG.SECURE_API_ENDPOINT.startsWith("https://") ? COOLSTORE_CONFIG.SECURE_API_ENDPOINT : "https://" + COOLSTORE_CONFIG.SECURE_API_ENDPOINT ) + '/services/cart';
+			baseUrl = (COOLSTORE_CONFIG.SECURE_API_ENDPOINT.startsWith("https://") ? COOLSTORE_CONFIG.SECURE_API_ENDPOINT : "https://" + COOLSTORE_CONFIG.SECURE_API_ENDPOINT ) + '/cart';
 		} else {
-			baseUrl = (COOLSTORE_CONFIG.API_ENDPOINT.startsWith("http://") ? COOLSTORE_CONFIG.API_ENDPOINT : "http://" + COOLSTORE_CONFIG.API_ENDPOINT) + '/services/cart';
+			baseUrl = (COOLSTORE_CONFIG.CART_API_ENDPOINT.startsWith("http://") ? COOLSTORE_CONFIG.CART_API_ENDPOINT : "http://" + COOLSTORE_CONFIG.CART_API_ENDPOINT) + '/cart';
 		}
 	}
 

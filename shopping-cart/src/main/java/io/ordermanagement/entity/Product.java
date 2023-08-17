@@ -1,45 +1,38 @@
-package io.ordermanagement.inventory.model;
+package io.ordermanagement.entity;
 
-import jakarta.json.bind.annotation.JsonbTransient;
-import jakarta.persistence.Column;
+import io.quarkus.hibernate.reactive.panache.Panache;
+import io.quarkus.hibernate.reactive.panache.PanacheEntityBase;
+import io.quarkus.panache.common.Sort;
+import io.smallrye.mutiny.Uni;
+
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
+import jakarta.json.bind.annotation.JsonbDateFormat;
+import jakarta.persistence.Cacheable;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.SequenceGenerator;
-import jakarta.persistence.Table;
-import jakarta.persistence.UniqueConstraint;
-import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
-import io.quarkus.runtime.annotations.RegisterForReflection;
+import java.time.Duration;
+import java.time.ZonedDateTime;
+import java.util.Collections;
+import java.util.List;
 
-@Entity
-@Table(name = "products",uniqueConstraints = @UniqueConstraint(columnNames = "itemId"))
-@RegisterForReflection
-public class Product extends PanacheEntityBase {
-	@Id
-    @SequenceGenerator(
-            name = "productsSequence",
-            sequenceName = "products_id_seq",
-            allocationSize = 1,
-            initialValue = 7)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "productsSequence")
+
+public class Product  {
+
 	private String itemId;
 	
-	@Column(length = 60)
 	private String name;
 	
-	@Column(length = 255)
 	private String description;
 
-	@Column(length = 255)
 	private String location;
 	
-	@Column
     private int quantity;
-	@Column
     private String link;
 
-	@Column
     private double price;
 	
 	public String getItemId() {
@@ -90,5 +83,4 @@ public class Product extends PanacheEntityBase {
 				+ location + ", quantity=" + quantity + ", link=" + link + ", price=" + price + "]";
 	}
 
-	
 }
