@@ -1,0 +1,79 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: order-management
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: inventory
+  namespace: order-management
+  labels:
+    app: inventory
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: inventory
+  template:
+    metadata:
+      labels:
+        app: inventory
+    spec:
+      containers:
+        - name: inventory
+          image: quay.io/feven/inventory:latest
+          env:
+            - name: POSTGRESQL_DATABASE
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-credentials
+                  key: POSTGRES_DB
+            - name: POSTGRESQL_USER
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-credentials
+                  key: POSTGRES_USER
+            - name: POSTGRESQL_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-credentials
+                  key: POSTGRES_PASSWORD
+                    #volumeMounts:
+                    #- name: app-config
+                    #mountPath: /deployments/config
+          ports:
+            - containerPort: 8080
+              #volumes:
+              #- name: app-config
+              #configMap:
+              #name: quarkus-app-config
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: inventory-service
+  namespace: order-management
+spec:
+  selector:
+    app: inventory
+  ports:
+  - name: inventory
+    port: 8080
+    targetPort: 8080
+  type: ClusterIP
+---
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  name: inventory-route
+  namespace: order-management
+spec:
+  to:
+    kind: Service
+    name: inventory-service
+    weight: 100
+  port:
+    targetPort: 8080
+  tls:
+    termination: edge
