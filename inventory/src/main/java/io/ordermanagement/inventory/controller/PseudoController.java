@@ -21,19 +21,19 @@ import org.eclipse.microprofile.opentracing.Traced;
 import org.jboss.logging.Logger;
 
 import io.opentracing.Tracer;
-import io.ordermanagement.inventory.model.Product;
-import io.ordermanagement.inventory.service.IProductService;
+import io.ordermanagement.inventory.model.Pseudo;
+import io.ordermanagement.inventory.service.IPseudoService;
 import io.quarkus.panache.common.Page;
 import io.quarkus.panache.common.Sort;
 
 
-@Path("/products")
+@Path("/pseudos")
 @ApplicationScoped
-public class ProductController {
-	private static Logger logger = Logger.getLogger( ProductController.class.getName() );
+public class PseudoController {
+	private static Logger logger = Logger.getLogger( PseudoController.class.getName() );
 	
 	@Inject
-	IProductService productService;
+	IPseudoService pseudoService;
 	
 	@Inject
 	Tracer tracer;
@@ -42,16 +42,30 @@ public class ProductController {
     @Path("/{id}")
     @Produces({ MediaType.APPLICATION_JSON })
 	@Traced
-    public Product getById(@PathParam("id") Integer id) {
-		Product p;
-		logger.debug("Entering ProductController.getById()");
-		p = productService.findById(id);
+    public Pseudo getById(@PathParam("id") Integer id) {
+		Pseudo p;
+		logger.debug("Entering PseudoController.getById()");
+		p = pseudoService.findById(id);
 		if (p == null) {
-			logger.error("Product not found");
+			logger.error("Pseudo not found");
 		}
 		return p;    
     }
 	
+	@GET
+    @Path("/{pseudoName}")
+    @Produces({ MediaType.APPLICATION_JSON })
+	@Traced
+    public Pseudo getByName(@PathParam("pseudoName") String pseudoName) {
+		Pseudo p;
+		logger.debug("Entering PseudoController.getById()");
+		p = pseudoService.findByName(pseudoName);
+		if (p == null) {
+			logger.error("Pseudo not found");
+		}
+		return p;    
+    }
+
 	@GET
 	@Produces({ MediaType.APPLICATION_JSON })
 	public Response findAll(@QueryParam("sort") String sortString,
@@ -59,14 +73,14 @@ public class ProductController {
             @QueryParam("size") @DefaultValue("20") int pageSize) {
 		Page page = Page.of(pageIndex, pageSize);
         Sort sort = getSortFromQuery(sortString);
-        return Response.ok(productService.findAll(page, sort)).build();
+        return Response.ok(pseudoService.findAll(page, sort)).build();
 	}
 
 	@POST
     @Transactional
-    public Response create(Product product) {
-        product.persist();
-        return Response.created(URI.create("/products/" + product.getItemId())).build();
+    public Response create(Pseudo pseudo) {
+        pseudo.persist();
+        return Response.created(URI.create("/pseudos/" + pseudo.getPseudoId())).build();
     }
 
 	/**

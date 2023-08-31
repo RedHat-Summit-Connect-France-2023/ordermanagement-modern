@@ -47,14 +47,14 @@ quarkus:
     kubernetes-config:
       enabled: false
     datasource:
-      # db-kind: h2
-      # jdbc:
-      #   url: jdbc:h2:mem:inventory;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
-      db-kind: postgresql
+      db-kind: h2
       jdbc:
-        url: jdbc:postgresql://localhost:5432/ordermgmt-db
-      username: connect23
-      password: connect23
+        url: jdbc:h2:mem:inventory;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+      # db-kind: postgresql
+      # jdbc:
+      #   url: jdbc:postgresql://localhost:5432/ordermgmt-db
+      # username: connect23
+      # password: connect23
 "%test":
   quarkus:
     kubernetes-config:

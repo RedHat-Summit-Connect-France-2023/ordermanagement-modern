@@ -8,7 +8,7 @@ import io.quarkus.panache.common.Sort;
 
 public interface IProductService {
 	
-	public Product findById(String id);
+	public Product findById(Integer id);
 	
 	public List<Product> findAll(Page page, Sort sort);
 }
