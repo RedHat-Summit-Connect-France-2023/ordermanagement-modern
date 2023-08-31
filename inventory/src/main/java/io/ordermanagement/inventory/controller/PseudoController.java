@@ -80,7 +80,9 @@ public class PseudoController {
     @Transactional
     public Response create(Pseudo pseudo) {
         pseudo.persist();
-        return Response.created(URI.create("/pseudos/" + pseudo.getPseudoId())).build();
+       // return Response.created(URI.create("/pseudos/" + pseudo.getPseudoId())).build();
+	   return  Response.status(200).entity(pseudo.getPseudoId().toString()).build();
+
     }
 
 	/**
