@@ -53,6 +53,21 @@ public class ProductController {
     }
 	
 	@GET
+    @Path("/{userId}")
+    @Produces({ MediaType.APPLICATION_JSON })
+	@Traced
+    public List<Product> getByUserId(@PathParam("userId") Integer userId) {
+		List<Product> p;
+		logger.debug("Entering ProductController.getById()");
+		p = productService.findByUserId(userId);
+		if (p == null) {
+			logger.error("User not found");
+		}
+		return p;
+
+    }
+
+	@GET
 	@Produces({ MediaType.APPLICATION_JSON })
 	public Response findAll(@QueryParam("sort") String sortString,
             @QueryParam("page") @DefaultValue("0") int pageIndex,

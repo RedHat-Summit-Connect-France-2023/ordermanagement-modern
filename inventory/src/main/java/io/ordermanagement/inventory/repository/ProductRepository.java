@@ -30,6 +30,12 @@ public class ProductRepository implements PanacheRepository<Product> {
 		childSpan.finish();
 		return p;
 	}
+
+	public List<Product> findByUserId(Integer userId) {
+
+		List<Product> p = Product.list("userId", userId);
+		return p;
+	}
 	
 	public List<Product> findAll(Page page, Sort sort) {
 		Span childSpan = tracer.buildSpan("findAll").start();

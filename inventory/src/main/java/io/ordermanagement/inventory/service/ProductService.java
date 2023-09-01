@@ -42,6 +42,16 @@ public class ProductService implements IProductService {
 		return p;
 	}
 
+		@Override
+	public List<Product> findByUserId(Integer userId) {
+		Span childSpan = tracer.buildSpan("findAll").start();
+		childSpan.setTag("layer", "Service");
+		logger.debug("Entering ProductService.findAll()");
+		List<Product> p = repository.findByUserId(userId);
+		childSpan.finish();
+		return p;
+	}
+
 	@Override
 	public List<Product> findAll(Page page, Sort sort) {
 		Span childSpan = tracer.buildSpan("findAll").start();
