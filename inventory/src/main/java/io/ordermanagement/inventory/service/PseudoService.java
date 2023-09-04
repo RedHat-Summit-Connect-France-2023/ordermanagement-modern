@@ -5,6 +5,7 @@ import java.util.List;
 
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
+import jakarta.persistence.EntityManagerFactory;
 import jakarta.transaction.Transactional;
 
 import org.jboss.logging.Logger;
@@ -13,6 +14,7 @@ import io.opentracing.Span;
 import io.opentracing.Tracer;
 import io.ordermanagement.inventory.model.Pseudo;
 import io.ordermanagement.inventory.repository.PseudoRepository;
+import io.quarkus.hibernate.orm.PersistenceUnit;
 import io.quarkus.panache.common.Page;
 import io.quarkus.panache.common.Sort;
 
@@ -24,6 +26,7 @@ public class PseudoService implements IPseudoService {
 	
 	@Inject
 	PseudoRepository repository;
+
 	
 	@Inject
 	Tracer tracer;

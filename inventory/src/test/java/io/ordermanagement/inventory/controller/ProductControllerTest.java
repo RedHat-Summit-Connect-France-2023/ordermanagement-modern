@@ -24,7 +24,7 @@ public class ProductControllerTest {
 	@BeforeEach
 	void initProduct() {
 		product = new Product();
-		product.setItemId("1");
+		product.setItemId(new Integer(1));
 		product.setName("Test");
 		product.setDescription("Test Product");
 		product.setPrice(200);
@@ -36,25 +36,25 @@ public class ProductControllerTest {
 	@Test
 	public void getByIdExisting() {
 		
-		when(productService.findById("1")).thenReturn(product);
+		when(productService.findById(329299)).thenReturn(product);
 		
 		given()
-			.when().get("/products/1")
+			.when().get("/products/329299")
 			.then()
-			.statusCode(200)
-			.body("id", is(1))
-			.body("name", is("Test"))
-			.body("description", is("Test Product"))
-			.body("price",is(200))
-			.body("location",is("france"))
-			.body("quantity",is(20))
-			.body("link", is("http://localhost:8080/test"));		
+			.statusCode(00)
+			.body("itemId", is(329299))
+			.body("name", is("http://maps.google.com/?q=Raleigh"))
+			.body("description", is("16 oz. Vortex Tumbler"))
+			.body("price",is(100))
+			.body("location",is("Raleigh"))
+			.body("quantity",is(736))
+			.body("link", is("http://maps.google.com/?q=Raleigh"));		
 	}
-	
+
 	@Test
 	public void getByIdNonExisting() {
 		
-		when(productService.findById("2")).thenReturn(null);
+		when(productService.findById(2)).thenReturn(null);
 		
 		given()
 			.when().get("/products/2")

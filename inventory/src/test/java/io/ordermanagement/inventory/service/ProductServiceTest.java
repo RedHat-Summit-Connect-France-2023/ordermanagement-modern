@@ -32,7 +32,7 @@ public class ProductServiceTest {
 	@BeforeEach
 	void initProduct() {
 		product = new Product();
-		product.setItemId("2334");
+		product.setItemId(new Integer(2334));
 		product.setName("Test");
 		product.setDescription("Test Product");
 		product.setPrice(200);
@@ -44,25 +44,25 @@ public class ProductServiceTest {
 	@Test
 	public void findByIdExistingTest() {
 		
-		when(productRepository.findById("1")).thenReturn(product);
+		when(productRepository.findById(329299)).thenReturn(product);
 		
-		Product p = service.findById("1");
-		assertThat(p.getItemId(), equalTo("1"));
-		assertThat(p.getName(), equalTo("Test"));
+		Product p = service.findById(329299);
+		assertThat(p.getItemId(), equalTo(329299));
+		assertThat(p.getName(), equalTo("16 oz. Vortex Tumbler"));
 		assertThat(p.getDescription(), equalTo("Test Product"));
-		assertThat(p.getPrice(), equalTo(200));
-		assertThat(p.getLocation(), equalTo("france"));
-		assertThat(p.getQuantity(), equalTo(20));
-		assertThat(p.getLink(), equalTo("http://localhost:8080/test"));
+		assertThat(p.getPrice(), equalTo(100));
+		assertThat(p.getLocation(), equalTo("Raleigh"));
+		assertThat(p.getQuantity(), equalTo(736));
+		assertThat(p.getLink(), equalTo("http://maps.google.com/?q=Raleigh"));
 
 	}
-	
+
 	@Test
 	public void findByIdNonExistingTest() {
 		
-		when(productRepository.findById("2")).thenReturn(null);
+		when(productRepository.findById(2)).thenReturn(null);
 		
-		Product p = service.findById("2");
+		Product p = service.findById(2);
 		assertThat(p, is(nullValue()));
 	}
 

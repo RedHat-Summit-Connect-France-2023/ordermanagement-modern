@@ -35,10 +35,10 @@
 			<groupId>io.quarkus</groupId>
 			<artifactId>quarkus-resteasy</artifactId>
 		</dependency>
-		<!-- <dependency>
+		<dependency>
 			<groupId>io.quarkus</groupId>
 			<artifactId>quarkus-openshift</artifactId>
-		</dependency> -->
+		</dependency>
 		<!-- <dependency>
 			<groupId>io.quarkus</groupId>
 			<artifactId>quarkus-container-image-s2i</artifactId>
@@ -67,10 +67,10 @@
 			<groupId>io.quarkus</groupId>
 			<artifactId>quarkus-smallrye-opentracing</artifactId>
 		</dependency>
-		<!-- <dependency>
+		<dependency>
 			<groupId>io.quarkus</groupId>
 			<artifactId>quarkus-kubernetes-config</artifactId>
-		</dependency> -->
+		</dependency>
 		<dependency>
 			<groupId>io.quarkus</groupId>
 			<artifactId>quarkus-jdbc-postgresql</artifactId>

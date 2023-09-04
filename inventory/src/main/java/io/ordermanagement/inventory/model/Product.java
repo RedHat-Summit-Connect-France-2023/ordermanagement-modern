@@ -26,7 +26,6 @@ public class Product extends PanacheEntityBase {
             allocationSize = 1,
             initialValue = 7)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "productsSequence") 
-
 	private Integer itemId;
 	
 	@Column(length = 60)
@@ -53,7 +52,7 @@ public class Product extends PanacheEntityBase {
 	public Integer getItemId() {
 		return itemId;
 	}
-	public void Integer(Integer itemId) {
+	public void setItemId(Integer itemId) {
 		this.itemId = itemId;
 	}
 
