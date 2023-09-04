@@ -1,8 +1,8 @@
 {
   "MONOLITH": false,
-  "CATALOG_API_ENDPOINT": "http://inventory-ordermgmt.apps.cluster-pr9p8.pr9p8.sandbox499.opentlc.com",
+  "CATALOG_API_ENDPOINT": "inventory-ordermgmt.apps.cluster-pr9p8.pr9p8.sandbox499.opentlc.com",
   "ORDER_API_ENDPOINT": "localhost:8084",
   "CART_API_ENDPOINT": "localhost:8085",
-  "SECURE_API_ENDPOINT": "http://inventory-ordermgmt.apps.cluster-pr9p8.pr9p8.sandbox499.opentlc.com",
+  "SECURE_API_ENDPOINT": "inventory-ordermgmt.apps.cluster-pr9p8.pr9p8.sandbox499.opentlc.com",
   "SSO_ENABLED": false
 }
