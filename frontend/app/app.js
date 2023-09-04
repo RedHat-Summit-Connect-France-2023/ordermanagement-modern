@@ -8,9 +8,9 @@ var module = angular.module('app', ['ngRoute', 'patternfly']), auth = {
 };
 
 
-module.factory('Auth', function () {
-    return auth;
-});
+// module.factory('Auth', function () {
+//     return auth;
+// });
 
 angular.element(document).ready(function () {
 
@@ -76,38 +76,38 @@ angular.element(document).ready(function () {
 
 
 // setup interceptors
-module.config(['$httpProvider', function ($httpProvider) {
+// module.config(['$httpProvider', function ($httpProvider) {
 
-    $httpProvider.interceptors.push(['$q', 'Auth', function ($q, Auth) {
-        return {
-            'request': function (config) {
-                var deferred = $q.defer();
-                if (Auth.authz && Auth.authz.token) {
-                    Auth.authz.updateToken(5).success(function () {
-                        config.headers = config.headers || {};
-                        config.headers.Authorization = 'Bearer ' + Auth.authz.token;
-                        config.withCredentials = true;
-                        deferred.resolve(config);
-                    }).error(function () {
-                        deferred.reject('Failed to refresh token');
-                    });
-                } else {
-                    config.withCredentials = false;
-                    deferred.resolve(config);
-                }
-                return deferred.promise;
+//     $httpProvider.interceptors.push(['$q', 'Auth', function ($q, Auth) {
+//         return {
+//             'request': function (config) {
+//                 var deferred = $q.defer();
+//                 if (Auth.authz && Auth.authz.token) {
+//                     Auth.authz.updateToken(5).success(function () {
+//                         config.headers = config.headers || {};
+//                         config.headers.Authorization = 'Bearer ' + Auth.authz.token;
+//                         config.withCredentials = true;
+//                         deferred.resolve(config);
+//                     }).error(function () {
+//                         deferred.reject('Failed to refresh token');
+//                     });
+//                 } else {
+//                     config.withCredentials = false;
+//                     deferred.resolve(config);
+//                 }
+//                 return deferred.promise;
 
-            },
-            'responseError': function (response) {
-                if (response.status == 401) {
-                    auth.logout();
-                }
-                return $q.reject(response);
+//             },
+//             'responseError': function (response) {
+//                 if (response.status == 401) {
+//                     auth.logout();
+//                 }
+//                 return $q.reject(response);
 
-            }
-        }
-    }]);
-}]);
+//             }
+//         }
+//     }]);
+// }]);
 
 
 

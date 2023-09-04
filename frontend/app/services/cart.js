@@ -9,8 +9,8 @@ angular.module("app")
 		baseUrl='/cart';
 	} else {
 		if ($location.protocol() === 'https') {
-			baseUrl = (COOLSTORE_CONFIG.SECURE_API_ENDPOINT.startsWith("https://") ? COOLSTORE_CONFIG.SECURE_API_ENDPOINT : "https://" + COOLSTORE_CONFIG.SECURE_API_ENDPOINT ) + '/cart';
-		} else {
+		// 	baseUrl = (COOLSTORE_CONFIG.SECURE_API_ENDPOINT.startsWith("https://") ? COOLSTORE_CONFIG.SECURE_API_ENDPOINT : "https://" + COOLSTORE_CONFIG.SECURE_API_ENDPOINT ) + '/cart';
+		// } else {
 			baseUrl = (COOLSTORE_CONFIG.CART_API_ENDPOINT.startsWith("http://") ? COOLSTORE_CONFIG.CART_API_ENDPOINT : "http://" + COOLSTORE_CONFIG.CART_API_ENDPOINT) + '/cart';
 		}
 	}

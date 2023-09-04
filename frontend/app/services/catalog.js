@@ -7,16 +7,17 @@ angular.module("app")
 
 	console.log("PRODUCT ",products)
 
-    if(!!COOLSTORE_CONFIG.MONOLITH) {
+    // if(!!COOLSTORE_CONFIG.MONOLITH) {
 
-	} else {
-		if ($location.protocol() === 'https') {
-			baseUrl = (COOLSTORE_CONFIG.SECURE_API_ENDPOINT.startsWith("http://") ? COOLSTORE_CONFIG.SECURE_API_ENDPOINT : "http://" + COOLSTORE_CONFIG.SECURE_API_ENDPOINT );
-		} else {
-			baseUrl = (COOLSTORE_CONFIG.CATALOG_API_ENDPOINT.startsWith("http://") ? COOLSTORE_CONFIG.API_ENDPOINT : "http://" + COOLSTORE_CONFIG.CATALOG_API_ENDPOINT );
-		}
-	}
+	// } else {
+	// 	if ($location.protocol() === 'https') {
+	// 		baseUrl = (COOLSTORE_CONFIG.SECURE_API_ENDPOINT.startsWith("http://") ? COOLSTORE_CONFIG.SECURE_API_ENDPOINT : "http://" + COOLSTORE_CONFIG.SECURE_API_ENDPOINT );
+	// 	} else {
+	// 		baseUrl = (COOLSTORE_CONFIG.CATALOG_API_ENDPOINT.startsWith("http://") ? COOLSTORE_CONFIG.API_ENDPOINT : "http://" + COOLSTORE_CONFIG.CATALOG_API_ENDPOINT );
+	// 	}
+	// }
 	console.log("CATALOG 2 : URL ",baseUrl);
+	baseUrl = (COOLSTORE_CONFIG.CATALOG_API_ENDPOINT.startsWith("http://") ? COOLSTORE_CONFIG.API_ENDPOINT : "http://" + COOLSTORE_CONFIG.CATALOG_API_ENDPOINT );
 
 	factory.getProducts = function() {
 
