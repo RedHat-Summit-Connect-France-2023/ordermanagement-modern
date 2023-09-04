@@ -33,11 +33,21 @@ public class ProductService implements IProductService {
 	 * @param id The {@link Product} {@code id}
 	 * @return The {@link Product} with the supplied {@code id}, {@literal null} if no {@link Product} is found. 
 	 */
-	public Product findById(String id) {
+	public Product findById(Integer id) {
 		Span childSpan = tracer.buildSpan("findById").start();
 		childSpan.setTag("layer", "Service");
 		logger.debug("Entering ProductService.findById()");
 		Product p = repository.findById(id);
+		childSpan.finish();
+		return p;
+	}
+
+		@Override
+	public List<Product> findByUserId(Integer userId) {
+		Span childSpan = tracer.buildSpan("findAll").start();
+		childSpan.setTag("layer", "Service");
+		logger.debug("Entering ProductService.findAll()");
+		List<Product> p = repository.findByUserId(userId);
 		childSpan.finish();
 		return p;
 	}

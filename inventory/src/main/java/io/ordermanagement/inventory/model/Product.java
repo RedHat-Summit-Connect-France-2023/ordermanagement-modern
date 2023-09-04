@@ -9,6 +9,9 @@ import jakarta.persistence.Id;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 import jakarta.persistence.UniqueConstraint;
+
+import org.hibernate.annotations.GenericGenerator;
+
 import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 import io.quarkus.runtime.annotations.RegisterForReflection;
 
@@ -22,8 +25,9 @@ public class Product extends PanacheEntityBase {
             sequenceName = "products_id_seq",
             allocationSize = 1,
             initialValue = 7)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "productsSequence")
-	private String itemId;
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "productsSequence") 
+
+	private Integer itemId;
 	
 	@Column(length = 60)
 	private String name;
@@ -33,6 +37,10 @@ public class Product extends PanacheEntityBase {
 
 	@Column(length = 255)
 	private String location;
+
+
+	@Column
+	private Integer userId;
 	
 	@Column
     private int quantity;
@@ -42,12 +50,20 @@ public class Product extends PanacheEntityBase {
 	@Column
     private double price;
 	
-	public String getItemId() {
+	public Integer getItemId() {
 		return itemId;
 	}
-	public void setItemId(String itemId) {
+	public void Integer(Integer itemId) {
 		this.itemId = itemId;
 	}
+
+	public Integer getUserId() {
+		return userId;
+	}
+	public void setUserId(Integer userId) {
+		this.userId = userId;
+	}
+	
 	public String getName() {
 		return name;
 	}
@@ -86,7 +102,7 @@ public class Product extends PanacheEntityBase {
 	}
 	@Override
 	public String toString() {
-		return "Product [itemId=" + itemId + ", name=" + name + ", description=" + description + ", location="
+		return "Product [itemId=" + itemId + ", name=" + name + ", userId="+userId+" description=" + description + ", location="
 				+ location + ", quantity=" + quantity + ", link=" + link + ", price=" + price + "]";
 	}
 
