@@ -11,13 +11,13 @@ angular.module("app")
 
 	// } else {
 	// 	if ($location.protocol() === 'https') {
-	// 		baseUrl = (COOLSTORE_CONFIG.SECURE_API_ENDPOINT.startsWith("http://") ? COOLSTORE_CONFIG.SECURE_API_ENDPOINT : "http://" + COOLSTORE_CONFIG.SECURE_API_ENDPOINT );
+	// 		baseUrl = (COOLSTORE_CONFIG.SECURE_API_ENDPOINT.startsWith("https://") ? COOLSTORE_CONFIG.SECURE_API_ENDPOINT : "https://" + COOLSTORE_CONFIG.SECURE_API_ENDPOINT );
 	// 	} else {
 	// 		baseUrl = (COOLSTORE_CONFIG.CATALOG_API_ENDPOINT.startsWith("http://") ? COOLSTORE_CONFIG.API_ENDPOINT : "http://" + COOLSTORE_CONFIG.CATALOG_API_ENDPOINT );
 	// 	}
 	// }
 	console.log("CATALOG 2 : URL ",baseUrl);
-	baseUrl = (COOLSTORE_CONFIG.CATALOG_API_ENDPOINT.startsWith("http://") ? COOLSTORE_CONFIG.API_ENDPOINT : "http://" + COOLSTORE_CONFIG.CATALOG_API_ENDPOINT );
+	baseUrl = (COOLSTORE_CONFIG.CATALOG_API_ENDPOINT.startsWith("https://") ? COOLSTORE_CONFIG.API_ENDPOINT : "https://" + COOLSTORE_CONFIG.CATALOG_API_ENDPOINT );
 
 	factory.getProducts = function() {
 

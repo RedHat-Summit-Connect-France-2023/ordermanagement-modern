@@ -1,0 +1,305 @@
+kind: DeploymentConfig
+apiVersion: apps.openshift.io/v1
+metadata:
+  annotations:
+    app.openshift.io/vcs-url: <<unknown>>
+    app.quarkus.io/build-timestamp: '2023-09-05 - 09:26:45 +0000'
+    app.quarkus.io/commit-id: 5f95b5b468cb86d533bb5388926a86b8b2b27098
+  resourceVersion: '931590'
+  name: inventory
+  uid: f579394d-3111-4830-9539-e40131e9715f
+  creationTimestamp: '2023-09-04T13:48:54Z'
+  generation: 14
+  managedFields:
+    - manager: fabric8-kubernetes-client
+      operation: Update
+      apiVersion: apps.openshift.io/v1
+      time: '2023-09-05T09:27:32Z'
+      fieldsType: FieldsV1
+      fieldsV1:
+        'f:metadata':
+          'f:annotations':
+            .: {}
+            'f:app.openshift.io/vcs-url': {}
+            'f:app.quarkus.io/build-timestamp': {}
+            'f:app.quarkus.io/commit-id': {}
+          'f:labels':
+            .: {}
+            'f:app.kubernetes.io/managed-by': {}
+            'f:app.kubernetes.io/name': {}
+            'f:app.kubernetes.io/version': {}
+            'f:app.openshift.io/runtime': {}
+        'f:spec':
+          'f:replicas': {}
+          'f:selector':
+            .: {}
+            'f:app.kubernetes.io/name': {}
+            'f:app.kubernetes.io/version': {}
+          'f:strategy':
+            'f:activeDeadlineSeconds': {}
+            'f:rollingParams':
+              .: {}
+              'f:intervalSeconds': {}
+              'f:maxSurge': {}
+              'f:maxUnavailable': {}
+              'f:timeoutSeconds': {}
+              'f:updatePeriodSeconds': {}
+            'f:type': {}
+          'f:template':
+            .: {}
+            'f:metadata':
+              .: {}
+              'f:annotations':
+                .: {}
+                'f:app.openshift.io/vcs-url': {}
+                'f:app.quarkus.io/build-timestamp': {}
+                'f:app.quarkus.io/commit-id': {}
+              'f:creationTimestamp': {}
+              'f:labels':
+                .: {}
+                'f:app.kubernetes.io/managed-by': {}
+                'f:app.kubernetes.io/name': {}
+                'f:app.kubernetes.io/version': {}
+                'f:app.openshift.io/runtime': {}
+            'f:spec':
+              'f:containers':
+                .: {}
+                'k:{"name":"inventory"}':
+                  'f:startupProbe':
+                    .: {}
+                    'f:failureThreshold': {}
+                    'f:httpGet':
+                      .: {}
+                      'f:path': {}
+                      'f:port': {}
+                      'f:scheme': {}
+                    'f:initialDelaySeconds': {}
+                    'f:periodSeconds': {}
+                    'f:successThreshold': {}
+                    'f:timeoutSeconds': {}
+                  'f:terminationMessagePolicy': {}
+                  .: {}
+                  'f:resources': {}
+                  'f:livenessProbe':
+                    .: {}
+                    'f:failureThreshold': {}
+                    'f:httpGet':
+                      .: {}
+                      'f:path': {}
+                      'f:port': {}
+                      'f:scheme': {}
+                    'f:initialDelaySeconds': {}
+                    'f:periodSeconds': {}
+                    'f:successThreshold': {}
+                    'f:timeoutSeconds': {}
+                  'f:env':
+                    .: {}
+                    'k:{"name":"JAVA_APP_JAR"}':
+                      .: {}
+                      'f:name': {}
+                      'f:value': {}
+                    'k:{"name":"KUBERNETES_NAMESPACE"}':
+                      .: {}
+                      'f:name': {}
+                      'f:valueFrom':
+                        .: {}
+                        'f:fieldRef': {}
+                  'f:readinessProbe':
+                    .: {}
+                    'f:failureThreshold': {}
+                    'f:httpGet':
+                      .: {}
+                      'f:path': {}
+                      'f:port': {}
+                      'f:scheme': {}
+                    'f:initialDelaySeconds': {}
+                    'f:periodSeconds': {}
+                    'f:successThreshold': {}
+                    'f:timeoutSeconds': {}
+                  'f:terminationMessagePath': {}
+                  'f:imagePullPolicy': {}
+                  'f:ports':
+                    .: {}
+                    'k:{"containerPort":8080,"protocol":"TCP"}':
+                      .: {}
+                      'f:containerPort': {}
+                      'f:name': {}
+                      'f:protocol': {}
+                  'f:name': {}
+              'f:dnsPolicy': {}
+              'f:serviceAccount': {}
+              'f:restartPolicy': {}
+              .: {}
+              'f:schedulerName': {}
+              'f:terminationGracePeriodSeconds': {}
+              'f:serviceAccountName': {}
+              'f:securityContext': {}
+    - manager: openshift-controller-manager
+      operation: Update
+      apiVersion: apps.openshift.io/v1
+      time: '2023-09-05T09:27:33Z'
+      fieldsType: FieldsV1
+      fieldsV1:
+        'f:spec':
+          'f:template':
+            'f:spec':
+              'f:containers':
+                'k:{"name":"inventory"}':
+                  'f:image': {}
+          'f:triggers': {}
+    - manager: openshift-controller-manager
+      operation: Update
+      apiVersion: apps.openshift.io/v1
+      time: '2023-09-05T09:28:13Z'
+      fieldsType: FieldsV1
+      fieldsV1:
+        'f:status':
+          'f:updatedReplicas': {}
+          'f:readyReplicas': {}
+          'f:conditions':
+            'k:{"type":"Progressing"}':
+              'f:lastTransitionTime': {}
+              'f:lastUpdateTime': {}
+              'f:message': {}
+              'f:reason': {}
+              'f:status': {}
+          'f:details':
+            'f:causes': {}
+          'f:replicas': {}
+          'f:availableReplicas': {}
+          'f:observedGeneration': {}
+          'f:unavailableReplicas': {}
+          'f:latestVersion': {}
+      subresource: status
+  namespace: ordermgmt
+  labels:
+    app.kubernetes.io/managed-by: quarkus
+    app.kubernetes.io/name: inventory
+    app.kubernetes.io/version: 1.0.0-SNAPSHOT
+    app.openshift.io/runtime: quarkus
+spec:
+  strategy:
+    type: Rolling
+    rollingParams:
+      updatePeriodSeconds: 1
+      intervalSeconds: 1
+      timeoutSeconds: 600
+      maxUnavailable: 25%
+      maxSurge: 25%
+    resources: {}
+    activeDeadlineSeconds: 21600
+  triggers:
+    - type: ImageChange
+      imageChangeParams:
+        automatic: true
+        containerNames:
+          - inventory
+        from:
+          kind: ImageStreamTag
+          namespace: ordermgmt
+          name: 'inventory:1.0.0-SNAPSHOT'
+        lastTriggeredImage: >-
+          image-registry.openshift-image-registry.svc:5000/ordermgmt/inventory@sha256:6e37bdad8551951fdcec822d41b18d051c23ec36ccd2673a005c6976daf4fa6c
+  replicas: 1
+  test: false
+  selector:
+    app.kubernetes.io/name: inventory
+    app.kubernetes.io/version: 1.0.0-SNAPSHOT
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app.kubernetes.io/managed-by: quarkus
+        app.kubernetes.io/name: inventory
+        app.kubernetes.io/version: 1.0.0-SNAPSHOT
+        app.openshift.io/runtime: quarkus
+      annotations:
+        app.openshift.io/vcs-url: <<unknown>>
+        app.quarkus.io/build-timestamp: '2023-09-05 - 09:26:45 +0000'
+        app.quarkus.io/commit-id: 5f95b5b468cb86d533bb5388926a86b8b2b27098
+    spec:
+      containers:
+        - resources: {}
+          readinessProbe:
+            httpGet:
+              path: /q/health/ready
+              port: 8080
+              scheme: HTTP
+            initialDelaySeconds: 5
+            timeoutSeconds: 10
+            periodSeconds: 10
+            successThreshold: 1
+            failureThreshold: 3
+          terminationMessagePath: /dev/termination-log
+          name: inventory
+          livenessProbe:
+            httpGet:
+              path: /q/health/live
+              port: 8080
+              scheme: HTTP
+            initialDelaySeconds: 5
+            timeoutSeconds: 10
+            periodSeconds: 10
+            successThreshold: 1
+            failureThreshold: 3
+          env:
+            - name: KUBERNETES_NAMESPACE
+              valueFrom:
+                fieldRef:
+                  apiVersion: v1
+                  fieldPath: metadata.namespace
+            - name: JAVA_APP_JAR
+              value: /deployments/quarkus-run.jar
+          ports:
+            - name: http
+              containerPort: 8080
+              protocol: TCP
+          imagePullPolicy: Always
+          startupProbe:
+            httpGet:
+              path: /q/health/started
+              port: 8080
+              scheme: HTTP
+            initialDelaySeconds: 5
+            timeoutSeconds: 10
+            periodSeconds: 10
+            successThreshold: 1
+            failureThreshold: 3
+          terminationMessagePolicy: File
+          image: >-
+            image-registry.openshift-image-registry.svc:5000/ordermgmt/inventory@sha256:6e37bdad8551951fdcec822d41b18d051c23ec36ccd2673a005c6976daf4fa6c
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 30
+      dnsPolicy: ClusterFirst
+      serviceAccountName: inventory
+      serviceAccount: inventory
+      securityContext: {}
+      schedulerName: default-scheduler
+status:
+  observedGeneration: 14
+  details:
+    message: image change
+    causes:
+      - type: ImageChange
+        imageTrigger:
+          from:
+            kind: DockerImage
+            name: 'mouchan/inventory:1.0.0-SNAPSHOT'
+  availableReplicas: 1
+  unavailableReplicas: 0
+  latestVersion: 9
+  updatedReplicas: 1
+  conditions:
+    - type: Available
+      status: 'True'
+      lastUpdateTime: '2023-09-04T13:49:28Z'
+      lastTransitionTime: '2023-09-04T13:49:28Z'
+      message: Deployment config has minimum availability.
+    - type: Progressing
+      status: 'True'
+      lastUpdateTime: '2023-09-05T09:28:13Z'
+      lastTransitionTime: '2023-09-05T09:28:09Z'
+      reason: NewReplicationControllerAvailable
+      message: replication controller "inventory-9" successfully rolled out
+  replicas: 1
+  readyReplicas: 1
