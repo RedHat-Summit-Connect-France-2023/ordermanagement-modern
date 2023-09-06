@@ -51,13 +51,12 @@ quarkus:
       endpoint: https://jaeger-all-in-one-inmemory-openshift-distributed-tracing.apps.cluster-pr9p8.pr9p8.sandbox499.opentlc.com/api/traces
       sampler-type: const
       sampler-param: 1
-
-  # container-image:
-  #   build: true
-  #   registry: quay.io
-  #   group: openshiftlabs
-  #   name: app-mod-inventory
-  #   tag: 1.0
+    container-image:
+      build: true
+      registry: quay.io
+      group: redhat-summit-connect-france-2023/ordermanagement-modern
+      name: orders
+      tag: 1.0-SNAPSHOT
 
 "%dev":
   quarkus:

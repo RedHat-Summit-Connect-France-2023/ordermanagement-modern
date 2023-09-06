@@ -1,10 +1,10 @@
 kind: DeploymentConfig
 apiVersion: apps.openshift.io/v1
 metadata:
-  name: inventory
+  name: orders
   labels:
     app.kubernetes.io/managed-by: quarkus
-    app.kubernetes.io/name: inventory
+    app.kubernetes.io/name: orders
     app.kubernetes.io/version: 1.0.0-SNAPSHOT
     app.openshift.io/runtime: quarkus
 spec:
@@ -23,23 +23,24 @@ spec:
       imageChangeParams:
         automatic: true
         containerNames:
-          - inventory
+          - orders
         from:
           kind: ImageStreamTag
           namespace: ordermgmt
-          name: 'inventory:1.0.0-SNAPSHOT'
+          name: 'orders:1.0.0-SNAPSHOT'
         lastTriggeredImage: >-
-          image-registry.openshift-image-registry.svc:5000/ordermgmt/inventory@sha256:6b1d797bef4fe655141a708493e23edffdd733ef37bfe1674aa12bca89dbb379
+          image-registry.openshift-image-registry.svc:5000/ordermgmt/orders@sha256:4c1cd825be7e44bac270e68d53c13476b589f3ba7e44bfcf2ece1fad92cf3978
   replicas: 1
   test: false
   selector:
-    app.kubernetes.io/name: inventory
+    app.kubernetes.io/name: orders
     app.kubernetes.io/version: 1.0.0-SNAPSHOT
   template:
     metadata:
+      creationTimestamp: null
       labels:
         app.kubernetes.io/managed-by: quarkus
-        app.kubernetes.io/name: inventory
+        app.kubernetes.io/name: orders
         app.kubernetes.io/version: 1.0.0-SNAPSHOT
         app.openshift.io/runtime: quarkus
     spec:
@@ -56,7 +57,7 @@ spec:
             successThreshold: 1
             failureThreshold: 3
           terminationMessagePath: /dev/termination-log
-          name: inventory
+          name: orders
           livenessProbe:
             httpGet:
               path: /q/health/live
@@ -92,11 +93,11 @@ spec:
             failureThreshold: 3
           terminationMessagePolicy: File
           image: >-
-            image-registry.openshift-image-registry.svc:5000/ordermgmt/inventory@sha256:6b1d797bef4fe655141a708493e23edffdd733ef37bfe1674aa12bca89dbb379
+            image-registry.openshift-image-registry.svc:5000/ordermgmt/orders@sha256:4c1cd825be7e44bac270e68d53c13476b589f3ba7e44bfcf2ece1fad92cf3978
       restartPolicy: Always
       terminationGracePeriodSeconds: 30
       dnsPolicy: ClusterFirst
-      serviceAccountName: inventory
-      serviceAccount: inventory
+      serviceAccountName: orders
+      serviceAccount: orders
       securityContext: {}
       schedulerName: default-scheduler
