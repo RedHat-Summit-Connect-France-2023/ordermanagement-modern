@@ -5,25 +5,25 @@
 -- INSERT INTO products(id, name, description) VALUES (5, 'Idol of Many Hands', 'Also known as the Fabulous Idol');
 -- INSERT INTO products(id, name, description) VALUES (6, 'How Much Wood? - Hardcover', 'From the Woodchuck Mystery series');
 
-/* insert into products (itemId, link, location, quantity, price,name,description) values ('329299', 'http://maps.google.com/?q=Raleigh', 'Raleigh', 736, 100,'16 oz. Vortex Tumbler','Vortex Trumbler');
-insert into products (itemId, link, location, quantity, price,name,description) values ('329199', 'http://maps.google.com/?q=Raleigh', 'Raleigh', 512, 200,'Atari 2600 Joystick', 'Joystick');
-insert into products (itemId, link, location, quantity, price,name,description) values ('165613', 'http://maps.google.com/?q=Raleigh', 'Raleigh', 256, 300,'Forge Laptop Sticker','Forge laptop');
-insert into products (itemId, link, location, quantity, price,name,description) values ('165614', 'http://maps.google.com/?q=Raleigh', 'Raleigh', 54, 400,'Lytro Camera.','Camera Lytro');
-insert into products (itemId, link, location, quantity, price,name,description) values ('165954', 'http://maps.google.com/?q=Raleigh', 'Raleigh', 87, 500, 'Oculus Rift.', 'Oculus Rift');
-insert into products (itemId, link, location, quantity, price,name,description) values ('444434', 'http://maps.google.com/?q=Raleigh', 'Raleigh', 443, 578,'Ogio Caliber Polo','Ogio');
-insert into products (itemId, link, location, quantity, price,name,description) values ('444435', 'http://maps.google.com/?q=Raleigh', 'Raleigh', 600, 2,'Pebble Smart Watch','Pebble Smart Watch');
+/* insert into products (itemId, link, location, quantity, price,name,description) values ('329299', '/imgs/', 'Raleigh', 736, 100,'16 oz. Vortex Tumbler','Vortex Trumbler');
+insert into products (itemId, link, location, quantity, price,name,description) values ('329199', '/imgs/', 'Raleigh', 512, 200,'Atari 2600 Joystick', 'Joystick');
+insert into products (itemId, link, location, quantity, price,name,description) values ('165613', '/imgs/', 'Raleigh', 256, 300,'Forge Laptop Sticker','Forge laptop');
+insert into products (itemId, link, location, quantity, price,name,description) values ('165614', '/imgs/', 'Raleigh', 54, 400,'Lytro Camera.','Camera Lytro');
+insert into products (itemId, link, location, quantity, price,name,description) values ('165954', '/imgs/', 'Raleigh', 87, 500, 'Oculus Rift.', 'Oculus Rift');
+insert into products (itemId, link, location, quantity, price,name,description) values ('444434', '/imgs/', 'Raleigh', 443, 578,'Ogio Caliber Polo','Ogio');
+insert into products (itemId, link, location, quantity, price,name,description) values ('444435', '/imgs/', 'Raleigh', 600, 2,'Pebble Smart Watch','Pebble Smart Watch');
 insert into products (itemId, link, location, quantity, price,name,description) values ('444436', 'http://maps.google.com/?q=Tokyo', 'Tokyo', 230, 3,'Red Fedora','Red Fedora');
 insert into products (itemId, link, location, quantity, price,name,description) values ('444437', 'http://maps.google.com/?q=Tokyo', 'Tokyo', 300, 5,'Solid Performance Polo','Solid Performance Polo');
 
  */
 
 
-insert into products (itemId, link, location, quantity, price,name,description) values (329299, 'http://maps.google.com/?q=Raleigh', 'Raleigh', 736, 100,'16 oz. Vortex Tumbler','Vortex Trumbler');
-insert into products (itemId, link, location, quantity, price,name,description) values (329199, 'http://maps.google.com/?q=Raleigh', 'Raleigh', 512, 200,'Atari 2600 Joystick', 'Joystick');
-insert into products (itemId, link, location, quantity, price,name,description) values (165613, 'http://maps.google.com/?q=Raleigh', 'Raleigh', 256, 300,'Forge Laptop Sticker','Forge laptop');
-insert into products (itemId, link, location, quantity, price,name,description) values (165614, 'http://maps.google.com/?q=Raleigh', 'Raleigh', 54, 400,'Lytro Camera.','Camera Lytro');
-insert into products (itemId, link, location, quantity, price,name,description) values (165954, 'http://maps.google.com/?q=Raleigh', 'Raleigh', 87, 500, 'Oculus Rift.', 'Oculus Rift');
-insert into products (itemId, link, location, quantity, price,name,description) values (444434, 'http://maps.google.com/?q=Raleigh', 'Raleigh', 443, 578,'Ogio Caliber Polo','Ogio');
-insert into products (itemId, link, location, quantity, price,name,description) values (444435, 'http://maps.google.com/?q=Raleigh', 'Raleigh', 600, 2,'Pebble Smart Watch','Pebble Smart Watch');
-insert into products (itemId, link, location, quantity, price,name,description) values (444436, 'http://maps.google.com/?q=Tokyo', 'Tokyo', 230, 3,'Red Fedora','Red Fedora');
-insert into products (itemId, link, location, quantity, price,name,description) values (444437, 'http://maps.google.com/?q=Tokyo', 'Tokyo', 300, 5,'Solid Performance Polo','Solid Performance Polo');
+insert into products (itemId, link, location, quantity, price,name,description) values (329299, '/imgs/Vortex Trumbler.jpg', 'Raleigh', 736, 100,'16 oz. Vortex Tumbler','Vortex Trumbler');
+insert into products (itemId, link, location, quantity, price,name,description) values (329199, '/imgs/Atari 2600 Joystick.jpg', 'Raleigh', 512, 200,'Atari 2600 Joystick', 'Joystick');
+insert into products (itemId, link, location, quantity, price,name,description) values (165613, '/imgs/Forge Laptop Sticker.jpg', 'Raleigh', 256, 300,'Forge Laptop Sticker','Forge laptop');
+insert into products (itemId, link, location, quantity, price,name,description) values (165614, '/imgs/Lytro Camera.jpg', 'Raleigh', 54, 400,'Lytro Camera','Camera Lytro');
+insert into products (itemId, link, location, quantity, price,name,description) values (165954, '/imgs/Oculus Rift.jpg', 'Raleigh', 87, 500, 'Oculus Rift', 'Oculus Rift');
+insert into products (itemId, link, location, quantity, price,name,description) values (444434, '/imgs/Ogio Caliber Polo.jpg', 'Raleigh', 443, 578,'Ogio Caliber Polo','Ogio');
+insert into products (itemId, link, location, quantity, price,name,description) values (444435, '/imgs/Pebble Smart Watch.jpg', 'Raleigh', 600, 2,'Pebble Smart Watch','Pebble Smart Watch');
+insert into products (itemId, link, location, quantity, price,name,description) values (444436, '/imgs/Red Fedora.jpg', 'Tokyo', 230, 3,'Red Fedora','Red Fedora');
+insert into products (itemId, link, location, quantity, price,name,description) values (444437, '/imgs/Solid Performance Polo.jpg', 'Tokyo', 300, 5,'Solid Performance Polo','Solid Performance Polo');
