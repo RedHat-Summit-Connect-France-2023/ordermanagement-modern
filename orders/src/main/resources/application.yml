@@ -40,13 +40,13 @@ quarkus:
       enabled: true
       config-maps:
         - orders-config
-    openshift:
-      route:
-        expose: true
-        target-port: http
-        tls:
-          termination: Edge
-          insecure-edge-termination-policy: Redirect        
+    # openshift:
+    #   route:
+    #     expose: true
+    #     target-port: http
+    #     tls:
+    #       termination: Edge
+    #       insecure-edge-termination-policy: Redirect        
     jaeger:
       endpoint: https://jaeger-all-in-one-inmemory-openshift-distributed-tracing.apps.cluster-pr9p8.pr9p8.sandbox499.opentlc.com/api/traces
       sampler-type: const
