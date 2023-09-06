@@ -18,7 +18,7 @@ insert into products (itemId, link, location, quantity, price,name,description) 
  */
 
 
-insert into products (itemId, link, location, quantity, price,name,description) values (329299, '/imgs/Vortex_Trumbler.jpg', 'Raleigh', 736, 100,'16 oz. Vortex Tumbler','Vortex Trumbler');
+insert into products (itemId, link, location, quantity, price,name,description) values (329299, '/imgs/Vortex_Tumbler.jpg', 'Raleigh', 736, 100,'16 oz. Vortex Tumbler','Vortex Tumbler');
 insert into products (itemId, link, location, quantity, price,name,description) values (329199, '/imgs/Atari_2600_Joystick.jpg', 'Raleigh', 512, 200,'Atari 2600 Joystick', 'Joystick');
 insert into products (itemId, link, location, quantity, price,name,description) values (165613, '/imgs/Forge_Laptop_Sticker.jpg', 'Raleigh', 256, 300,'Forge Laptop Sticker','Forge laptop');
 insert into products (itemId, link, location, quantity, price,name,description) values (165614, '/imgs/Lytro_Camera.jpg', 'Raleigh', 54, 400,'Lytro Camera','Camera Lytro');
