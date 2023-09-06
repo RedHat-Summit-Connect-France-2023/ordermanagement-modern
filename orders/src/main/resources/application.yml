@@ -3,17 +3,13 @@ quarkus:
     path: /swagger
   swagger-ui:
     always-include: true
+
   log:
     level: DEBUG
     category:
-      "io.ordermanagement":
+      "io.ordermanagement.order":
         level: DEBUG
-  # container-image:
-  #   build: true
-  #   registry: quay.io
-  #   group: openshiftlabs
-  #   name: app-mod-inventory
-  #   tag: 1.0
+
 "%prod":
   quarkus:
     http:
@@ -23,37 +19,46 @@ quarkus:
         origins: '*'
         headers: accept, authorization, content-type, x-requested-with, X-Custom
         methods: GET, OPTIONS, POST
-        access-control-allow-credentials: true
-    kubernetes-client:
-      trust-certs: true
-    kubernetes-config:
-      enabled: true
-      secrets: "postgresql-ordermgmt"
+        access-control-allow-credentials: true  
     datasource:
       ordermgmt-db:
         db-kind: postgresql
         username: connect23
-        password: connect23
+        password: connect23 
         jdbc:
-          url: jdbc:postgresql://postgresql-ordermgmt:5432/ordermgmt-db
+          url: jdbc:postgresql://postgresql-ordermgmt:5432/ordermgmt-db    
     hibernate-orm:
-      "orders":
+      "order":
         packages: io.ordermanagement.order.model
-        datasource: ordermgmt-db
+        datasource: ordermgmt-db            
         database:
           generation: drop-and-create
-        sql-load-script: orders.sql
+        sql-load-script: orders.sql          
+    kubernetes-client:
+      trust-certs: true
+    kubernetes-config:
+      enabled: true
+      config-maps:
+        - orders-config
     openshift:
       route:
         expose: true
-        target-port: https
+        target-port: http
         tls:
           termination: Edge
-          insecure-edge-termination-policy: Redirect
+          insecure-edge-termination-policy: Redirect        
     jaeger:
       endpoint: https://jaeger-all-in-one-inmemory-openshift-distributed-tracing.apps.cluster-pr9p8.pr9p8.sandbox499.opentlc.com/api/traces
       sampler-type: const
       sampler-param: 1
+
+  # container-image:
+  #   build: true
+  #   registry: quay.io
+  #   group: openshiftlabs
+  #   name: app-mod-inventory
+  #   tag: 1.0
+
 "%dev":
   quarkus:
     http:

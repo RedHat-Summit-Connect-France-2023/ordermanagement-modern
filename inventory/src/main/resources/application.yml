@@ -3,11 +3,26 @@ quarkus:
     path: /swagger
   swagger-ui:
     always-include: true
+
+    # "products":
+    #   database:
+    #     generation: drop-and-create
+    #     sql-load-script: import.sql
+    #   packages: io.ordermanagement.inventory.model.pseudo, io.ordermanagement.inventory.model.product
+    #   datasource: products 
+    # "pseudo":
+    #   database:
+    #     generation: update
+    #     sql-load-script: load-users.sql
+    #   packages: io.ordermanagement.inventory.model.pseudo
+    #   datasource: ordermgmt 
+
   log:
     level: DEBUG
     category:
       "io.ordermanagement":
         level: DEBUG
+
   # container-image:
   #   build: true
   #   registry: quay.io
@@ -46,7 +61,7 @@ quarkus:
     openshift:
       route:
         expose: true
-        target-port: https
+        target-port: http
         tls:
           termination: Edge
           insecure-edge-termination-policy: Redirect

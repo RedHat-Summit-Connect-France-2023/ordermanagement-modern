@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>CoolStore Inventory</title>
+    <title>CoolStore Orders</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css"
           integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css"
@@ -15,7 +15,7 @@
 <body>
 <div class="jumbotron">
     <div class="container">
-        <h1 class="display-3">CoolStore Inventory</h1>
+        <h1 class="display-3">CoolStore Orders</h1>
         <p>This shows the latest CoolStore Orders from the Order Management microservice using <a href="https://quarkus.io">Quarkus</a>.
         </p>
     </div>
@@ -25,10 +25,10 @@
     <div class="row">
         <div class="col-md-12">
             <br><br>
-            <button class="btn btn-danger btn-lg" onclick="fetchInventory()">Fetch Inventory</button>
+            <button class="btn btn-danger btn-lg" onclick="fetchOrders()">Fetch Orders</button>
             <hr>
             <center>
-                <h1>The CoolStore Inventory</h1>
+                <h1>The CoolStore Orders</h1>
                 <h2>Status: <code id="statusCode">unknown</code> (Last Successful Fetch: <span id="fetchAge">never</span>)</h2>
             </center>
             <table class="table table-bordered" id="products" border='1'>
@@ -43,7 +43,7 @@
                 </tr>
             </table>
             <hr>
-            <button class="btn btn-danger btn-lg" onclick="fetchOrders()">Fetch Inventory</button>
+            <button class="btn btn-danger btn-lg" onclick="fetchOrders()">Fetch Orders</button>
 
         </div>
     </div>
@@ -51,7 +51,7 @@
     <hr>
 
     <footer>
-        <p>&copy; Red Hat 2017</p>
+        <p>&copy; Red Hat 2023</p>
     </footer>
 </div> <!-- /container -->
 
@@ -91,14 +91,13 @@
                     $.each(data, function (i, order) {
 
                         trHTML += '<tr>' +
-                            '<td>' + order.orderId + '</td>' +
-                            '<td><strong>' + order.customerName + '</strong></td>' +
-                            '<td>'+ order.customerEmail + '</td>' +
-                            '<td>'+ order.orderValue + '</td>' +
-                            '<td>'+ order.retailPrice + '</td>' +
-                            '<td>'+ order.shippingFee + '</td>' +
-                            '<td>'+ order.shippingDiscount + '</td>' +
-
+                                '<td>' + order.orderId + '</td>' +
+                                '<td><strong>' + order.customerName + '</strong></td>' +
+                                '<td>'+ order.customerEmail + '</td>' +
+                                '<td>'+ order.orderValue + '</td>' +
+                                '<td>'+ order.retailPrice + '</td>' +
+                                '<td>'+ order.shippingFee + '</td>' +
+                                '<td>'+ order.shippingDiscount + '</td>' +
                             '</tr>';
                     });
 
@@ -123,10 +122,10 @@
     $(document).ready(function () {
         jQuery("time.timeago").timeago();
 
-        fetchInventory();
+        fetchOrders();
 
         setInterval(function() {
-            fetchInventory();
+            fetchOrders();
         }, 2000);
     })
 
