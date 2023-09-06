@@ -37,7 +37,6 @@ public class Product extends PanacheEntityBase {
 	@Column(length = 255)
 	private String location;
 
-
 	@Column
 	private Integer userId;
 	
@@ -48,7 +47,16 @@ public class Product extends PanacheEntityBase {
 
 	@Column
     private double price;
+
+	@Column
+    private String category;
 	
+	public String getCategory() {
+		return category;
+	}
+	public void setCategory(String category) {
+		this.category = category;
+	}
 	public Integer getItemId() {
 		return itemId;
 	}
@@ -99,11 +107,14 @@ public class Product extends PanacheEntityBase {
 	public void setLink(String link) {
 		this.link = link;
 	}
+	
 	@Override
 	public String toString() {
-		return "Product [itemId=" + itemId + ", name=" + name + ", userId="+userId+" description=" + description + ", location="
-				+ location + ", quantity=" + quantity + ", link=" + link + ", price=" + price + "]";
+		return "Product [itemId=" + itemId + ", name=" + name + ", description=" + description + ", location="
+				+ location + ", userId=" + userId + ", quantity=" + quantity + ", link=" + link + ", price=" + price
+				+ ", category=" + category + "]";
 	}
+
 
 	
 }

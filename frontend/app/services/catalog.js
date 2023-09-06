@@ -33,7 +33,6 @@ angular.module("app")
 				url: baseUrl + '/products'
             }).then(function(resp) {
 				console.log ("get product result ",resp)
-
                 products = resp.data;
                 deferred.resolve(resp.data);
             }, function(err) {
