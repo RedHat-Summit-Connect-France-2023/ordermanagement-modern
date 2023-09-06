@@ -1,40 +1,59 @@
 quarkus:
-  smallrye-openapi.path: /swagger
-  swagger-ui.always-include: true
-  kubernetes-client:
-    trust-certs: true
-  kubernetes-config:
-    enabled: true
-    config-maps:
-      - orders-config
-  hibernate-orm:
-    database:
-      generation: drop-and-create
-    sql-load-script: load.sql
-  datasource:
-    db-kind: postgresql
-    username: connect23
-    password: connect23
-    jdbc:
-      url: jdbc:postgresql://localhost:5432/ordermgmt-db
-
+  smallrye-openapi:
+    path: /swagger
+  swagger-ui:
+    always-include: true
   log:
     level: DEBUG
     category:
-      "io.ordermanagement.order":
+      "io.ordermanagement":
         level: DEBUG
-  jaeger:
-    endpoint: http://localhost:14268/api/traces
-    sampler-type: const
-    sampler-param: 1
-
   # container-image:
   #   build: true
   #   registry: quay.io
   #   group: openshiftlabs
   #   name: app-mod-inventory
   #   tag: 1.0
-
+"%prod":
+  quarkus:
+    http:
+      insecure-requests: enabled
+      cors:
+        ~: true
+        origins: '*'
+        headers: accept, authorization, content-type, x-requested-with, X-Custom
+        methods: GET, OPTIONS, POST
+        access-control-allow-credentials: true
+    kubernetes-client:
+      trust-certs: true
+    kubernetes-config:
+      enabled: true
+      secrets: "postgresql-ordermgmt"
+    datasource:
+      ordermgmt-db:
+        db-kind: postgresql
+        username: connect23
+        password: connect23
+        jdbc:
+          url: jdbc:postgresql://postgresql-ordermgmt:5432/ordermgmt-db
+    hibernate-orm:
+      "orders":
+        packages: io.ordermanagement.order.model
+        datasource: ordermgmt-db
+        database:
+          generation: drop-and-create
+        sql-load-script: orders.sql
+    openshift:
+      route:
+        expose: true
+        target-port: https
+        tls:
+          termination: Edge
+          insecure-edge-termination-policy: Redirect
+    jaeger:
+      endpoint: https://jaeger-all-in-one-inmemory-openshift-distributed-tracing.apps.cluster-pr9p8.pr9p8.sandbox499.opentlc.com/api/traces
+      sampler-type: const
+      sampler-param: 1
 "%dev":
   quarkus:
     http:
@@ -47,14 +66,23 @@ quarkus:
     kubernetes-config:
       enabled: false
     datasource:
-      # db-kind: h2
-      # jdbc:
-      #   url: jdbc:h2:mem:inventory;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
-      db-kind: postgresql
-      jdbc:
-        url: jdbc:postgresql://localhost:5432/ordermgmt-db
-      username: connect23
-      password: connect23
+      ordermgmt-db:
+        db-kind: postgresql
+        username: connect23
+        password: connect23 
+        jdbc:
+          url: jdbc:postgresql://postgresql-ordermgmt:5432/ordermgmt-db
+    jaeger:
+      endpoint: http://localhost:14268/api/traces
+      sampler-type: const
+      sampler-param: 1
+    hibernate-orm:
+      "orders":
+        packages: io.ordermanagement.order.model
+        datasource: ordermgmt-db
+        database:
+          generation: update
+        sql-load-script: orders.sql
 "%test":
   quarkus:
     kubernetes-config:

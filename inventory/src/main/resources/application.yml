@@ -3,26 +3,11 @@ quarkus:
     path: /swagger
   swagger-ui:
     always-include: true
-
-    # "products":
-    #   database:
-    #     generation: drop-and-create
-    #     sql-load-script: import.sql
-    #   packages: io.ordermanagement.inventory.model.pseudo, io.ordermanagement.inventory.model.product
-    #   datasource: products 
-    # "pseudo":
-    #   database:
-    #     generation: update
-    #     sql-load-script: load-users.sql
-    #   packages: io.ordermanagement.inventory.model.pseudo
-    #   datasource: ordermgmt 
-
   log:
     level: DEBUG
     category:
       "io.ordermanagement":
         level: DEBUG
-
   # container-image:
   #   build: true
   #   registry: quay.io
@@ -61,10 +46,10 @@ quarkus:
     openshift:
       route:
         expose: true
-        target-port: http
-        # tls:
-        #   termination: passthrough
-        #   insecure-edge-termination-policy: None
+        target-port: https
+        tls:
+          termination: Edge
+          insecure-edge-termination-policy: Redirect
     jaeger:
       endpoint: https://jaeger-all-in-one-inmemory-openshift-distributed-tracing.apps.cluster-pr9p8.pr9p8.sandbox499.opentlc.com/api/traces
       sampler-type: const
@@ -77,6 +62,7 @@ quarkus:
         origins: '*'
         headers: accept, authorization, content-type, x-requested-with
         methods: GET, OPTIONS, POST
+      port: 8083
     kubernetes-config:
       enabled: false
     datasource:
