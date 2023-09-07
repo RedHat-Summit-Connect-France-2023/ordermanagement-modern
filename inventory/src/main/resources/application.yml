@@ -34,18 +34,18 @@ quarkus:
         headers: accept, authorization, content-type, x-requested-with, X-Custom
         methods: GET, OPTIONS, POST
         access-control-allow-credentials: true
-    kubernetes-config:
-      enabled: true
-      secrets: 
-        ~: "ordermgmt-config"
-        enabled: true
+    # kubernetes-config:
+    #   enabled: true
+    #   secrets: 
+    #     ~: "ordermgmt-config"
+    #     enabled: true
     datasource:
       ordermgmt-db:
         db-kind: postgresql
         username: connect23
         password: connect23 
         jdbc:
-          url: jdbc:postgresql://postgresql-ordermgmt:5432/ordermgmt-db 
+          url: jdbc:postgresql://ordermgmt:5432/ordermgmt-db 
     hibernate-orm:
       "inventory":
         packages: io.ordermanagement.inventory.model
