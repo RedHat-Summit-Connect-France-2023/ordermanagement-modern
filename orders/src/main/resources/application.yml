@@ -1,3 +1,4 @@
+
 quarkus:
   smallrye-openapi:
     path: /swagger
@@ -23,10 +24,10 @@ quarkus:
     datasource:
       ordermgmt-db:
         db-kind: postgresql
-        username: connect23
-        password: connect23 
+        username: ${database-name}
+        password: ${database-password} 
         jdbc:
-          url: jdbc:postgresql://postgresql-ordermgmt:5432/ordermgmt-db    
+          url: jdbc:postgresql://${database-host}/${database-name} 
     hibernate-orm:
       "order":
         packages: io.ordermanagement.order.model

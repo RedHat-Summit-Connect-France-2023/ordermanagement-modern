@@ -1,3 +1,14 @@
+kind: Secret
+apiVersion: v1
+metadata:
+  name: ordermgmt-config
+data:
+  database-host: cG9zdGdyZXNxbC1vcmRlcm1nbXQ6NTQzMg==
+  database-name: b3JkZXJtZ210LWRiIA==
+  database-password: Y29ubmVjdDIz
+  database-user: Y29ubmVjdDIz
+type: Opaque
+---
 kind: DeploymentConfig
 apiVersion: apps.openshift.io/v1
 metadata:
@@ -8,28 +19,6 @@ metadata:
     app.kubernetes.io/version: 1.0.0-SNAPSHOT
     app.openshift.io/runtime: quarkus
 spec:
-  strategy:
-    type: Rolling
-    rollingParams:
-      updatePeriodSeconds: 1
-      intervalSeconds: 1
-      timeoutSeconds: 600
-      maxUnavailable: 25%
-      maxSurge: 25%
-    resources: {}
-    activeDeadlineSeconds: 21600
-  triggers:
-    - type: ImageChange
-      imageChangeParams:
-        automatic: true
-        containerNames:
-          - inventory
-        from:
-          kind: ImageStreamTag
-          namespace: ordermgmt
-          name: 'inventory:1.0.0-SNAPSHOT'
-        lastTriggeredImage: >-
-          image-registry.openshift-image-registry.svc:5000/ordermgmt/inventory@sha256:6b1d797bef4fe655141a708493e23edffdd733ef37bfe1674aa12bca89dbb379
   replicas: 1
   test: false
   selector:
@@ -92,11 +81,7 @@ spec:
             failureThreshold: 3
           terminationMessagePolicy: File
           image: >-
-            image-registry.openshift-image-registry.svc:5000/ordermgmt/inventory@sha256:6b1d797bef4fe655141a708493e23edffdd733ef37bfe1674aa12bca89dbb379
-      restartPolicy: Always
+            quay.io/redhat-summit-connect-france-2023/ordermanagement-modern/inventory:1.0-SNAPSHOT
       terminationGracePeriodSeconds: 30
       dnsPolicy: ClusterFirst
-      serviceAccountName: inventory
-      serviceAccount: inventory
       securityContext: {}
-      schedulerName: default-scheduler

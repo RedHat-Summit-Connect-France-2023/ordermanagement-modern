@@ -34,13 +34,18 @@ quarkus:
         headers: accept, authorization, content-type, x-requested-with, X-Custom
         methods: GET, OPTIONS, POST
         access-control-allow-credentials: true
+    kubernetes-config:
+      enabled: true
+      secrets: 
+        ~: "ordermgmt-config"
+        enabled: true
     datasource:
       ordermgmt-db:
         db-kind: postgresql
         username: connect23
         password: connect23 
         jdbc:
-          url: jdbc:postgresql://postgresql-ordermgmt:5432/ordermgmt-db
+          url: jdbc:postgresql://postgresql-ordermgmt:5432/ordermgmt-db 
     hibernate-orm:
       "inventory":
         packages: io.ordermanagement.inventory.model
@@ -50,27 +55,24 @@ quarkus:
         sql-load-script: products.sql
     kubernetes-client:
       trust-certs: true
-    kubernetes-config:
-      enabled: true
-      secrets: "postgresql-ordermgmt"
-    # openshift:
-    #   route:
-    #     expose: true
-    #     target-port: http
-    #     tls:
-    #       termination: Edge
-    #       insecure-edge-termination-policy: Redirect
+    openshift:
+      route:
+        expose: true
+        target-port: http
+        tls:
+          termination: Edge
+          insecure-edge-termination-policy: Redirect
     jaeger:
       endpoint: https://jaeger-all-in-one-inmemory-openshift-distributed-tracing.apps.cluster-pr9p8.pr9p8.sandbox499.opentlc.com/api/traces
       sampler-type: const
       sampler-param: 1
-    container-image:
-      build: true
-      push: true
-      registry: quay.io
-      group: redhat-summit-connect-france-2023/ordermanagement-modern
-      name: inventory
-      tag: 1.0-SNAPSHOT
+    # container-image:
+    #   build: true
+    #   push: true
+    #   registry: quay.io
+    #   group: redhat-summit-connect-france-2023/ordermanagement-modern
+    #   name: inventory
+    #   tag: 1.0-SNAPSHOT
 "%dev":
   quarkus:
     http:

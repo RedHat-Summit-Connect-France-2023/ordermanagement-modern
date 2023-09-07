@@ -45,11 +45,11 @@ public class ProductService implements IProductService {
 	}
 
 		@Override
-	public List<Product> findByUserId(Integer userId) {
+	public List<Product> findByPseudoId(Integer pseudoId) {
 		Span childSpan = tracer.buildSpan("findAll").start();
 		childSpan.setTag("layer", "Service");
 		logger.debug("Entering ProductService.findAll()");
-		List<Product> p = repository.findByUserId(userId);
+		List<Product> p = repository.findByPseudoId(pseudoId);
 		childSpan.finish();
 		return p;
 	}

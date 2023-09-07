@@ -10,7 +10,7 @@ public interface IProductService {
 	
 	public Product findById(Integer id);
 
-	public List<Product> findByUserId(Integer userId);
+	public List<Product> findByPseudoId(Integer userId);
 	
 	public List<Product> findAll(Page page, Sort sort);
 	

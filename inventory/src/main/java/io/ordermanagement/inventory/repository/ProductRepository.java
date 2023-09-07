@@ -31,9 +31,9 @@ public class ProductRepository implements PanacheRepository<Product> {
 		return p;
 	}
 
-	public List<Product> findByUserId(Integer userId) {
+	public List<Product> findByPseudoId(Integer pseudoId) {
 
-		List<Product> p = Product.list("userId", userId);
+		List<Product> p = Product.list("pseudoId", pseudoId);
 		return p;
 	}
 	

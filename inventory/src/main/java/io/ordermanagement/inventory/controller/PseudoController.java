@@ -10,6 +10,7 @@ import jakarta.transaction.Transactional;
 import jakarta.ws.rs.DefaultValue;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.POST;
+import jakarta.ws.rs.PUT;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
@@ -82,8 +83,8 @@ public class PseudoController {
         pseudo.persist();
        // return Response.created(URI.create("/pseudos/" + pseudo.getPseudoId())).build();
 	   return  Response.status(200).entity(pseudo.getPseudoId().toString()).build();
-
     }
+
 
 	/**
 	 * This method tries to mimic the behavior of Spring MVC's @EnableSpringDataWebSupport annotation when it comes to the sort parameter.

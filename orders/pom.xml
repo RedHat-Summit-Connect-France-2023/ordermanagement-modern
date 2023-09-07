@@ -28,10 +28,10 @@
     </dependencies>
   </dependencyManagement>
   <dependencies>
-    <dependency>
+    <!-- <dependency>
       <groupId>io.quarkus</groupId>
       <artifactId>quarkus-openshift</artifactId>
-    </dependency>
+    </dependency> -->
     <dependency>
 			<groupId>io.quarkus</groupId>
 			<artifactId>quarkus-config-yaml</artifactId>
