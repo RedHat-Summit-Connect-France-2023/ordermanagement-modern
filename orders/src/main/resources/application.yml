@@ -24,10 +24,10 @@ quarkus:
     datasource:
       ordermgmt-db:
         db-kind: postgresql
-        username: ${database-name}
-        password: ${database-password} 
+        username: connect23
+        password: connect23 
         jdbc:
-          url: jdbc:postgresql://${database-host}/${database-name} 
+          url: jdbc:postgresql://ordermgmt:5432/ordermgmt-db 
     hibernate-orm:
       "order":
         packages: io.ordermanagement.order.model
@@ -37,10 +37,10 @@ quarkus:
         sql-load-script: orders.sql          
     kubernetes-client:
       trust-certs: true
-    kubernetes-config:
-      enabled: true
-      config-maps:
-        - orders-config
+    # kubernetes-config:
+    #   enabled: true
+    #   config-maps:
+    #     - orders-config
     # openshift:
     #   route:
     #     expose: true
