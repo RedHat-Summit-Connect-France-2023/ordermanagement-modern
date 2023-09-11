@@ -1,0 +1,110 @@
+---
+openapi: 3.0.3
+info:
+  title: orders API
+  version: 1.0.0-SNAPSHOT
+paths:
+  /orders:
+    get:
+      tags:
+      - Order Controller
+      parameters:
+      - name: page
+        in: query
+        schema:
+          format: int32
+          default: 0
+          type: integer
+      - name: size
+        in: query
+        schema:
+          format: int32
+          default: 20
+          type: integer
+      - name: sort
+        in: query
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+    post:
+      tags:
+      - Order Controller
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Order'
+      responses:
+        "200":
+          description: OK
+  /orders/{id}:
+    get:
+      tags:
+      - Order Controller
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Order'
+components:
+  schemas:
+    Order:
+      type: object
+      properties:
+        orderId:
+          format: int64
+          type: integer
+        customerName:
+          type: string
+        customerEmail:
+          type: string
+        orderValue:
+          format: double
+          type: number
+        retailPrice:
+          format: double
+          type: number
+        discount:
+          format: double
+          type: number
+        shippingFee:
+          format: double
+          type: number
+        shippingDiscount:
+          format: double
+          type: number
+        itemList:
+          type: array
+          items:
+            $ref: '#/components/schemas/OrderItem'
+    OrderItem:
+      type: object
+      properties:
+        id:
+          format: int64
+          type: integer
+        order:
+          $ref: '#/components/schemas/Order'
+        quantity:
+          format: int32
+          type: integer
+        productId:
+          type: string
+        price:
+          format: double
+          type: number
+  securitySchemes:
+    SecurityScheme:
+      type: http
+      description: Authentication
+      scheme: basic
