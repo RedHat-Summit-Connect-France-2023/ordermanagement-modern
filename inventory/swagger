@@ -1,0 +1,201 @@
+---
+openapi: 3.0.3
+info:
+  title: inventory API
+  version: 1.0.0-SNAPSHOT
+paths:
+  /products:
+    get:
+      tags:
+      - Product Controller
+      parameters:
+      - name: page
+        in: query
+        schema:
+          format: int32
+          default: 0
+          type: integer
+      - name: size
+        in: query
+        schema:
+          format: int32
+          default: 20
+          type: integer
+      - name: sort
+        in: query
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+    post:
+      tags:
+      - Product Controller
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Product'
+      responses:
+        "200":
+          description: OK
+  /products/pseudo/{pseudoId}:
+    get:
+      tags:
+      - Product Controller
+      parameters:
+      - name: pseudoId
+        in: path
+        required: true
+        schema:
+          format: int32
+          type: integer
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Product'
+  /products/update/{id}:
+    put:
+      tags:
+      - Product Controller
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Product'
+      responses:
+        "200":
+          description: OK
+  /products/{id}:
+    get:
+      tags:
+      - Product Controller
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          format: int32
+          type: integer
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+  /pseudos:
+    get:
+      tags:
+      - Pseudo Controller
+      parameters:
+      - name: page
+        in: query
+        schema:
+          format: int32
+          default: 0
+          type: integer
+      - name: size
+        in: query
+        schema:
+          format: int32
+          default: 20
+          type: integer
+      - name: sort
+        in: query
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+    post:
+      tags:
+      - Pseudo Controller
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Pseudo'
+      responses:
+        "200":
+          description: OK
+  /pseudos/{id}:
+    get:
+      tags:
+      - Pseudo Controller
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          format: int32
+          type: integer
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Pseudo'
+  /pseudos/{pseudoName}:
+    get:
+      tags:
+      - Pseudo Controller
+      parameters:
+      - name: pseudoName
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Pseudo'
+components:
+  schemas:
+    Product:
+      type: object
+      properties:
+        itemId:
+          format: int32
+          type: integer
+        name:
+          type: string
+        description:
+          type: string
+        location:
+          type: string
+        pseudoId:
+          format: int32
+          type: integer
+        quantity:
+          format: int32
+          type: integer
+        link:
+          type: string
+        price:
+          format: double
+          type: number
+        category:
+          type: string
+    Pseudo:
+      type: object
+      properties:
+        pseudoId:
+          format: int32
+          type: integer
+        pseudoName:
+          type: string
+  securitySchemes:
+    SecurityScheme:
+      type: http
+      description: Authentication
+      scheme: basic
