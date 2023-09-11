@@ -1,3 +1,4 @@
+---
 kind: DeploymentConfig
 apiVersion: apps.openshift.io/v1
 metadata:
@@ -5,27 +6,8 @@ metadata:
   namespace: ordermgmt
   labels:
     template: postgresql-ephemeral-template
-    template.openshift.io/template-instance-owner: 5cc10ad1-73db-4cc5-89b7-3e14a888b713
 spec:
-  strategy:
-    type: Recreate
-    recreateParams:
-      timeoutSeconds: 600
-    resources: {}
-    activeDeadlineSeconds: 21600
-  triggers:
-    - type: ImageChange
-      imageChangeParams:
-        automatic: true
-        containerNames:
-          - postgresql
-        from:
-          kind: ImageStreamTag
-          namespace: openshift
-          name: 'postgresql:10-el8'
-    - type: ConfigChange
   replicas: 1
-  revisionHistoryLimit: 10
   test: false
   selector:
     name: postgresql-ordermgmt

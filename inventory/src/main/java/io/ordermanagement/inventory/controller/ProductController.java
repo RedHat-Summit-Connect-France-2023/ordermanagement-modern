@@ -81,26 +81,23 @@ public class ProductController {
 	@POST
     @Transactional
     public Response create(Product product) {
-        product.persist();
-        return Response.created(URI.create("/products/" + product.getItemId())).build();
-    }
-	@PUT
-	@Path("/update/{id}")
-    @Transactional
-    public Response update(Product product) {
 		Product p = productService.findById(product.getItemId());
 		if (p == null) {
-			logger.error("Product not found");
+			product.persist();
+		} else {
+			p.setCategory(product.getCategory());
+			p.setDescription(product.getDescription());
+			p.setLink(product.getLink());
+			p.setLocation(product.getLocation());
+			p.setName(product.getName());
+			p.setPrice(product.getPrice());
+			p.setQuantity(product.getQuantity());
 		}
-		p.setCategory(product.getCategory());
-		p.setDescription(product.getDescription());
-		p.setLink(product.getLink());
-		p.setLocation(product.getLocation());
-		p.setName(product.getName());
-		p.setPrice(product.getPrice());
-		p.setQuantity(product.getQuantity());
-		return Response.created(URI.create("/products/update/" + p.getItemId())).build();
+       
+        return Response.created(URI.create("/products/" + product.getItemId())).build();
     }
+
+
 	/**
 	 * This method tries to mimic the behavior of Spring MVC's @EnableSpringDataWebSupport annotation when it comes to the sort parameter.
 	 * @param sortString The string containing the sort query to be used. Must have the "field,asc/desc" format or the second part of the query will be ignored.

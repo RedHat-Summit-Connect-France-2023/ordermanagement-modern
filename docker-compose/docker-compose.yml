@@ -13,7 +13,7 @@ services:
       environment:
         - POSTGRES_USER=connect23
         - POSTGRES_PASSWORD=connect23
-        - POSTGRES_DB=ordermgmt-db
+        - POSTGRES_DB=ordermanagement
       networks:
       - ordermgmt-network
   jaeger:

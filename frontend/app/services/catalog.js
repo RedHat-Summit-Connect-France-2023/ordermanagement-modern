@@ -17,7 +17,7 @@ angular.module("app")
 	// 	}
 	// }
 	console.log("CATALOG 2 : URL ",baseUrl);
-	baseUrl = (COOLSTORE_CONFIG.CATALOG_API_ENDPOINT.startsWith("https://") ? COOLSTORE_CONFIG.API_ENDPOINT : "https://" + COOLSTORE_CONFIG.CATALOG_API_ENDPOINT );
+	baseUrl = COOLSTORE_CONFIG.CATALOG_API_ENDPOINT;
 
 	factory.getProducts = function() {
 

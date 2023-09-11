@@ -2,7 +2,7 @@ var express = require('express');
 const app = express();
 const http = require('http');
 const path = require('path');
-const port = process.env.PORT || 8080;
+const port = process.env.PORT || 8085;
 
 app.use(express.static(__dirname + '/app'));
 
@@ -17,4 +17,4 @@ app.get('/*', (req, res) => res.sendFile(path.join(__dirname)));
 
 const server = http.createServer(app);
 
-server.listen(8080, () => console.log(`App running on: http://localhost:${port}`));
+server.listen(8085, () => console.log(`App running on: http://localhost:${port}`));

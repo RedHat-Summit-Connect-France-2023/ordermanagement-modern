@@ -14,7 +14,7 @@ angular.module("app")
     //         baseUrl = (COOLSTORE_CONFIG.ORDER_API_ENDPOINT.startsWith("http://") ? COOLSTORE_CONFIG.ORDER_API_ENDPOINT : "http://" + COOLSTORE_CONFIG.ORDER_API_ENDPOINT);
     //     }
     // }
-    baseUrl = (COOLSTORE_CONFIG.ORDER_API_ENDPOINT.startsWith("https://") ? COOLSTORE_CONFIG.ORDER_API_ENDPOINT : "https://" + COOLSTORE_CONFIG.ORDER_API_ENDPOINT);
+    baseUrl = COOLSTORE_CONFIG.ORDER_API_ENDPOINT;
 
     factory.getOrders = function() {
         
