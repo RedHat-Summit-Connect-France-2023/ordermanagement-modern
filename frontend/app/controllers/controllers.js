@@ -8,7 +8,7 @@ angular.module('app')
                 $scope.products = [];
                 $scope.addToCart = function (item) {
                     cart.addToCart(item.product, parseInt(item.quantity)).then(function (data) {
-                        Notifications.success("Added! Your total is " + $filter('currency')(data.cartTotal));
+                        Notifications.success("Added! Your total is " + $filter('currency:'EUR':'symbol':'3.2-2':'fr'')(data.cartTotal));
                     }, function (err) {
                         Notifications.error("Error adding to cart: " + err.statusText);
                     });
