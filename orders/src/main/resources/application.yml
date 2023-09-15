@@ -36,11 +36,11 @@ quarkus:
         sql-load-script: orders.sql          
     kubernetes-client:
       trust-certs: true
-    kubernetes-config:
-      enabled: true
-      secrets: 
-        ~: "ordermgmt-config"
-        enabled: true
+    # kubernetes-config:
+    #   enabled: true
+    #   secrets: 
+    #     ~: "ordermgmt-config"
+    #     enabled: true
     # openshift:
     #   route:
     #     expose: true

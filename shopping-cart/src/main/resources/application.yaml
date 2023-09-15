@@ -15,7 +15,7 @@ quarkus:
     password: connect23
     jdbc: false
     reactive:
-      url: postgresql://localhost:5432//ordermgmt-db
+      url: postgresql://localhost:5432/ordermanagement
       max-size: 20
 #"%prod":
 #  quarkus:

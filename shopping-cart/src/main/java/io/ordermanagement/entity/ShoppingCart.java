@@ -18,10 +18,14 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.NamedQueries;
 import jakarta.persistence.NamedQuery;
 import jakarta.persistence.OneToMany;
-import jakarta.persistence.NoArgsConstructor;
-import jakarta.persistence.AllArgsConstructor;
-import jakarta.persistence.Builder;
 import jakarta.persistence.NamedQueries;
+
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
+
+
 
 import java.time.Duration;
 import java.util.List;
@@ -32,6 +36,7 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+
 @NamedQueries(value = {@NamedQuery(name = "ShoppingCart.findAll",
         query = "SELECT c FROM ShoppingCart c LEFT JOIN FETCH c.cartItems item LEFT JOIN FETCH item.product"),
         @NamedQuery(name = "ShoppingCart.getById",

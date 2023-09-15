@@ -1,9 +1,13 @@
 package io.ordermanagement.entity;
 
+
 import io.quarkus.hibernate.reactive.panache.Panache;
 import io.quarkus.hibernate.reactive.panache.PanacheEntityBase;
 import io.quarkus.panache.common.Sort;
 import io.smallrye.mutiny.Uni;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -19,68 +23,71 @@ import java.time.ZonedDateTime;
 import java.util.Collections;
 import java.util.List;
 
+@Entity
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+@Cacheable
+public class Product extends PanacheEntityBase {
 
-public class Product  {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    public Long id;
 
-	private String itemId;
-	
-	private String name;
-	
-	private String description;
+    public String title;
+    public String description;
 
-	private String location;
-	
-    private int quantity;
-    private String link;
+    @JsonbDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'")
+    @CreationTimestamp
+    public ZonedDateTime createdAt;
 
-    private double price;
-	
-	public String getItemId() {
-		return itemId;
-	}
-	public void setItemId(String itemId) {
-		this.itemId = itemId;
-	}
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
-	}
-	public String getDescription() {
-		return description;
-	}
-	public void setDescription(String description) {
-		this.description = description;
-	}
-	public double getPrice() {
-		return price;
-	}
-	public void setPrice(double price) {
-		this.price = price;
-	}
-	public String getLocation() {
-		return location;
-	}
-	public void setLocation(String location) {
-		this.location = location;
-	}
-	public int getQuantity() {
-		return quantity;
-	}
-	public void setQuantity(int quantity) {
-		this.quantity = quantity;
-	}
-	public String getLink() {
-		return link;
-	}
-	public void setLink(String link) {
-		this.link = link;
-	}
-	@Override
-	public String toString() {
-		return "Product [itemId=" + itemId + ", name=" + name + ", description=" + description + ", location="
-				+ location + ", quantity=" + quantity + ", link=" + link + ", price=" + price + "]";
-	}
+    @JsonbDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'")
+    @UpdateTimestamp
+    public ZonedDateTime updatedAt;
 
+    public static Uni<Product> findByProductId(Long id) {
+        return findById(id);
+    }
+
+    public static Uni<Product> updateProduct(Long id, Product product) {
+        return Panache
+                .withTransaction(() -> findByProductId(id)
+                        .onItem().ifNotNull()
+                        .transform(entity -> {
+                            entity.description = product.description;
+                            entity.title = product.title;
+                            return entity;
+                        })
+                        .onFailure().recoverWithNull());
+    }
+
+    public static Uni<Product> addProduct(Product product) {
+        return Panache
+                .withTransaction(product::persist)
+                .replaceWith(product)
+                .ifNoItem()
+                .after(Duration.ofMillis(10000))
+                .fail()
+                .onFailure()
+                .transform(t -> new IllegalStateException(t));
+    }
+
+    public static Uni<List<Product>> getAllProducts() {
+        return Product
+                .listAll(Sort.by("createdAt"))
+                .ifNoItem()
+                .after(Duration.ofMillis(10000))
+                .fail()
+                .onFailure()
+                .recoverWithUni(Uni.createFrom().<List<PanacheEntityBase>>item(Collections.EMPTY_LIST));
+
+    }
+
+    public static Uni<Boolean> deleteProduct(Long id) {
+        return Panache.withTransaction(() -> deleteById(id));
+    }
+
+    public String toString() {
+        return this.getClass().getSimpleName() + "<" + this.id + ">";
+    }
 }

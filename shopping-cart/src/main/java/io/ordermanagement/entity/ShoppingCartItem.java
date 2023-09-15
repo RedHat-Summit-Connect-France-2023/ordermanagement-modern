@@ -21,9 +21,11 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import java.math.BigDecimal;
 
-import jakarta.persistence.NoArgsConstructor;
-import jakarta.persistence.AllArgsConstructor;
-import jakarta.persistence.Builder;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+
 import jakarta.persistence.NamedQueries;
 
 @Entity
