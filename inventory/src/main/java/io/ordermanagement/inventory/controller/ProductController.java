@@ -27,6 +27,9 @@ import io.ordermanagement.inventory.service.IProductService;
 import io.quarkus.panache.common.Page;
 import io.quarkus.panache.common.Sort;
 
+import io.micrometer.core.instrument.MeterRegistry;
+import io.micrometer.core.instrument.Tags;
+
 
 @Path("/products")
 @ApplicationScoped
@@ -35,6 +38,9 @@ public class ProductController {
 	
 	@Inject
 	IProductService productService;
+
+	@Inject
+    MeterRegistry registry;
 	
 	@Inject
 	Tracer tracer;
@@ -44,6 +50,7 @@ public class ProductController {
     @Produces({ MediaType.APPLICATION_JSON })
 	@Traced
     public Product getById(@PathParam("id") Integer id) {
+		registry.counter("product_getById_counter", Tags.of("id", id+"")).increment();
 		Product p;
 		logger.debug("Entering ProductController.getById()");
 		p = productService.findById(id);
@@ -58,6 +65,8 @@ public class ProductController {
     @Produces({ MediaType.APPLICATION_JSON })
 	@Traced
     public List<Product> getByPseudoId(@PathParam("pseudoId") Integer pseudoId) {
+		registry.counter("product_getByPseudoId_counter", Tags.of("PseudoId", pseudoId+"")).increment();
+
 		List<Product> p;
 		logger.debug("Entering ProductController.getById()");
 		p = productService.findByPseudoId(pseudoId);
@@ -73,6 +82,8 @@ public class ProductController {
 	public Response findAll(@QueryParam("sort") String sortString,
             @QueryParam("page") @DefaultValue("0") int pageIndex,
             @QueryParam("size") @DefaultValue("20") int pageSize) {
+		registry.counter("product_findAllProduct_counter", Tags.of("products", "products")).increment();
+		
 		Page page = Page.of(pageIndex, pageSize);
         Sort sort = getSortFromQuery(sortString);
         return Response.ok(productService.findAll(page, sort)).build();
@@ -81,6 +92,7 @@ public class ProductController {
 	@POST
     @Transactional
     public Response create(Product product) {
+		registry.counter("product_createProduct_counter", Tags.of("productName", product.getName())).increment();
 		Product p = productService.findById(product.getItemId());
 		if (p == null) {
 			product.persist();
