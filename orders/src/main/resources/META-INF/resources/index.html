@@ -15,8 +15,8 @@
 <body>
 <div class="jumbotron">
     <div class="container">
-        <h1 class="display-3">CoolStore Orders</h1>
-        <p>This shows the latest CoolStore Orders from the Order Management microservice using <a href="https://quarkus.io">Quarkus</a>.
+        <h1 class="display-3">TheGoodCorner Orders</h1>
+        <p>This shows the latest TheGoodCorner Orders from the Order Management microservice using <a href="https://quarkus.io">Quarkus</a>.
         </p>
     </div>
 </div>
@@ -28,7 +28,7 @@
             <button class="btn btn-danger btn-lg" onclick="fetchOrders()">Fetch Orders</button>
             <hr>
             <center>
-                <h1>The CoolStore Orders</h1>
+                <h1>TheGoodCorner Orders</h1>
                 <h2>Status: <code id="statusCode">unknown</code> (Last Successful Fetch: <span id="fetchAge">never</span>)</h2>
             </center>
             <table class="table table-bordered" id="products" border='1'>
@@ -51,7 +51,7 @@
     <hr>
 
     <footer>
-        <p>&copy; Red Hat 2023</p>
+        <p>&copy; TheGoodCorner 2023</p>
     </footer>
 </div> <!-- /container -->
 
@@ -78,7 +78,7 @@
         $.ajax(
             {
                 type: "GET",
-                url: 'https://orders-ordermgmt.apps.cluster-pr9p8.pr9p8.sandbox499.opentlc.com/orders',
+                url: 'https://orders-thegoodcorner-dev.apps.summitconnect.sandbox2218.opentlc.com/orders',
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 cache: false,
@@ -101,20 +101,20 @@
                             '</tr>';
                     });
 
-                    //$('#products').find("tr:gt(0)").remove();
+                    $('#products').find("tr:gt(0)").remove();
                     $('#products').append(trHTML);
 
-                    //$('#statusCode').text("OK").css('color', 'green');
-                    //$("#fetchAge").text("moments ago");
+                    $('#statusCode').text("OK").css('color', 'green');
+                    $("#fetchAge").text("moments ago");
                 },
 
                 error: function (msg) {
 
                     $('#statusCode').text("DEAD (" + (msg) + ")").css('color', 'red');
-                   // $("#fetchAge").text(Math.floor(((new Date().getTime() - lastFetch) / 1000)) + " seconds ago");
+                   $("#fetchAge").text(Math.floor(((new Date().getTime() - lastFetch) / 1000)) + " seconds ago");
 
-                    // $("time#statusTime").timeago("update", new Date());
-                    //$('#statusTime').attr('datetime', now).textContent(now);
+                    $("time#statusTime").timeago("update", new Date());
+                    $('#statusTime').attr('datetime', now).textContent(now);
                 }
             });
     }
@@ -124,9 +124,9 @@
 
         fetchOrders();
 
-        setInterval(function() {
-            fetchOrders();
-        }, 2000);
+        // setInterval(function() {
+        //     fetchOrders();
+        // }, 2000);
     })
 
 </script>
