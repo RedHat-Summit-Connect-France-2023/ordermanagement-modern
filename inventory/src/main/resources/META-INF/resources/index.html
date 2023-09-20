@@ -85,26 +85,20 @@
                     lastFetch = new Date().getTime();
 
                     $.each(data, function (i, product) {
-
                         trHTML += '<tr>' +
                             '<td>' + product.itemId + '</td>' +
                             '<td><strong>' + product.quantity + '</strong></td>' +
                             '<td><a href="' + product.link + '">' + product.location + '</a></td>' +
                             '</tr>';
                     });
-
-                    //$('#products').find("tr:gt(0)").remove();
+                    $('#products').find("tr:gt(0)").remove();
                     $('#products').append(trHTML);
-
                     $('#statusCode').text("OK").css('color', 'green');
                     $("#fetchAge").text("moments ago");
                 },
-
                 error: function (msg) {
-
                     $('#statusCode').text("DEAD (" + (msg) + ")").css('color', 'red');
                    $("#fetchAge").text(Math.floor(((new Date().getTime() - lastFetch) / 1000)) + " seconds ago");
-
                     $("time#statusTime").timeago("update", new Date());
                     $('#statusTime').attr('datetime', now).textContent(now);
                 }
@@ -113,12 +107,10 @@
 
     $(document).ready(function () {
         jQuery("time.timeago").timeago();
-
         fetchInventory();
-
-        setInterval(function() {
-            fetchInventory();
-        }, 2000);
+        // setInterval(function() {
+        //     fetchInventory();
+        // }, 2000);
     })
 
 </script>
