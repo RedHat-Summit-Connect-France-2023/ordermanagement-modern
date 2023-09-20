@@ -29,7 +29,7 @@ quarkus:
         username: connect23
         password: connect23 
         jdbc:
-          url: jdbc:postgresql://postgresql:5432/ordermanagement 
+          url: jdbc:postgresql://postgresql.thegoodcorner-legacy.svc.cluster.local:5432/ordermanagement
     hibernate-orm:
       "inventory":
         packages: io.ordermanagement.inventory.model

@@ -26,7 +26,7 @@ quarkus:
         username: connect23
         password: connect23 
         jdbc:
-          url: jdbc:postgresql://postgresql:5432/ordermanagement 
+          url: jdbc:postgresql://postgresql.thegoodcorner-legacy.svc.cluster.local:5432/ordermanagement
     hibernate-orm:
       "order":
         packages: io.ordermanagement.order.model
@@ -41,13 +41,13 @@ quarkus:
     #   secrets: 
     #     ~: "ordermgmt-config"
     #     enabled: true
-    # openshift:
-    #   route:
-    #     expose: true
-    #     target-port: http
-    #     tls:
-    #       termination: Edge
-    #       insecure-edge-termination-policy: Redirect        
+    openshift:
+      route:
+        expose: true
+        target-port: http
+        tls:
+          termination: Edge
+          insecure-edge-termination-policy: Redirect        
     jaeger:
       endpoint: https://jaeger-all-in-one-inmemory-openshift-distributed-tracing.apps.cluster-pr9p8.pr9p8.sandbox499.opentlc.com/api/traces
       sampler-type: const
