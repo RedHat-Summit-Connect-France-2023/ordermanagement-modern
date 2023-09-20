@@ -1,7 +1,7 @@
 {
   "MONOLITH": false,
   "CATALOG_API_ENDPOINT": "https://inventory-thegoodcorner-sandbox.apps.summitconnect.sandbox2218.opentlc.com",
-  "ORDER_API_ENDPOINT": "https://orders-thegoodcorner-sandbox.apps.summitconnect.sandbox2218.opentlc.com/",
+  "ORDER_API_ENDPOINT": "https://orders-thegoodcorner-sandbox.apps.summitconnect.sandbox2218.opentlc.com",
   "CART_API_ENDPOINT": "http://localhost:8086",
   "SSO_ENABLED": false
 }
