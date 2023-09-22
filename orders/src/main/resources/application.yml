@@ -31,8 +31,7 @@ quarkus:
       "order":
         packages: io.ordermanagement.order.model
         datasource: ordermgmt-db            
-        database:
-          generation: drop-and-create
+
         sql-load-script: orders.sql          
     kubernetes-client:
       trust-certs: true
