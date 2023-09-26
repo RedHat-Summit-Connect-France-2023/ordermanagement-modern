@@ -109,6 +109,23 @@ public class ProductController {
         return Response.created(URI.create("/products/" + product.getItemId())).build();
     }
 
+	@PUT
+	@Path("{productId}/{quantiy}")
+	@Produces({ MediaType.APPLICATION_JSON })
+    @Transactional
+    public Response updateQuantiy(@QueryParam("productId") Integer productId, @PathParam("quantity") Integer quantity) {
+		String message;
+		registry.counter("product_updateQuantity_counter", Tags.of("productId", productId+"")).increment();
+		Product p = productService.findById(productId);
+		if (p.getQuantity() < quantity) {
+			 message = "Only "+p.getQuantity()+"items left";
+		} else {
+        	message = "Quantiy updated for product "+productId;
+			p.setQuantity(quantity); 
+		}
+		return Response.ok(message).build();
+    }
+
 
 	/**
 	 * This method tries to mimic the behavior of Spring MVC's @EnableSpringDataWebSupport annotation when it comes to the sort parameter.

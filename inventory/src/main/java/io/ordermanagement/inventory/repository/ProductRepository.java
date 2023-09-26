@@ -32,7 +32,6 @@ public class ProductRepository implements PanacheRepository<Product> {
 	}
 
 	public List<Product> findByPseudoId(Integer pseudoId) {
-
 		List<Product> p = Product.list("pseudoId", pseudoId);
 		return p;
 	}
@@ -47,5 +46,6 @@ public class ProductRepository implements PanacheRepository<Product> {
 		childSpan.finish();
 		return p;
 	}
+
 
 }

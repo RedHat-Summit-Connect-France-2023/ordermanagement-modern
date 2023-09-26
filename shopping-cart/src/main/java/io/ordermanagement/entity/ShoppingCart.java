@@ -28,138 +28,114 @@ import lombok.NoArgsConstructor;
 
 
 import java.time.Duration;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
 
-@Entity
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder
+public class ShoppingCart{
 
-@NamedQueries(value = {@NamedQuery(name = "ShoppingCart.findAll",
-        query = "SELECT c FROM ShoppingCart c LEFT JOIN FETCH c.cartItems item LEFT JOIN FETCH item.product"),
-        @NamedQuery(name = "ShoppingCart.getById",
-                query = "SELECT c FROM ShoppingCart c LEFT JOIN FETCH c.cartItems item LEFT JOIN FETCH item.product where c.id = ?1")})
-public class ShoppingCart extends PanacheEntityBase {
+	private static final long serialVersionUID = -1108043957592113528L;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public Long id;
-
-    public int cartTotal;
-
-    private double cartItemTotal;
+	private double cartItemTotal;
 
 	private double cartItemPromoSavings;
 	
 	private double shippingTotal;
 	
 	private double shippingPromoSavings;
+	
+	private double cartTotal;
+			
+	private List<ShoppingCartItem> shoppingCartItemList = new ArrayList<ShoppingCartItem>();
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL,
-            orphanRemoval = true)
-    @JoinColumn
-    public Set<ShoppingCartItem> cartItems;
+	public ShoppingCart() {
+		
+	}
+	
+	public List<ShoppingCartItem> getShoppingCartItemList() {
+		return shoppingCartItemList;
+	}
 
-    public String name;
+	public void setShoppingCartItemList(List<ShoppingCartItem> shoppingCartItemList) {
+		this.shoppingCartItemList = shoppingCartItemList;
+	}
 
-    public void calculateCartTotal() {
-        cartTotal = cartItems.stream().mapToInt(ShoppingCartItem::getQuantity).sum();
-    }
+	public void resetShoppingCartItemList() {
+		shoppingCartItemList = new ArrayList<ShoppingCartItem>();
+	}
 
-    public static Uni<ShoppingCart> findByShoppingCartId(Long id) {
-        return find("#ShoppingCart.getById", id).firstResult();
-    }
+	public void addShoppingCartItem(ShoppingCartItem sci) {
+		
+		if ( sci != null ) {
+			
+			shoppingCartItemList.add(sci);
+			
+		}
+		
+	}
+	
+	public boolean removeShoppingCartItem(ShoppingCartItem sci) {
+		
+		boolean removed = false;
+		
+		if ( sci != null ) {
+			
+			removed = shoppingCartItemList.remove(sci);
+			
+		}
+		
+		return removed;
+		
+	}
 
-    public static Uni<List<ShoppingCart>> getAllShoppingCarts() {
-        return find("#ShoppingCart.findAll").list();
-    }
+	public double getCartItemTotal() {
+		return cartItemTotal;
+	}
 
-    public static Multi<ShoppingCart> findAllWithJoinFetch() {
-        return stream("SELECT c FROM ShoppingCart c LEFT JOIN FETCH c.cartItems");
-    }
+	public void setCartItemTotal(double cartItemTotal) {
+		this.cartItemTotal = cartItemTotal;
+	}
 
-    public static Uni<ShoppingCart> createShoppingCart(ShoppingCart shoppingCart) {
-        return Panache
-                .withTransaction(shoppingCart::persist)
-                .replaceWith(shoppingCart)
-                .ifNoItem()
-                .after(Duration.ofMillis(10000))
-                .fail()
-                .onFailure()
-                .transform(t -> new IllegalStateException(t));
-    }
+	public double getShippingTotal() {
+		return shippingTotal;
+	}
 
-    public static Uni<ShoppingCart> addProductToShoppingCart(Long shoppingCartId, Long productId) {
+	public void setShippingTotal(double shippingTotal) {
+		this.shippingTotal = shippingTotal;
+	}
 
-        Uni<ShoppingCart> cart = findById(shoppingCartId);
-        Uni<Set<ShoppingCartItem>> cartItemsUni = cart
-                .chain(shoppingCart -> Mutiny.fetch(shoppingCart.cartItems)).onFailure().recoverWithNull();
-        Uni<Product> productUni = Product.findByProductId(productId);
-        Uni<ShoppingCartItem> item = ShoppingCartItem.findByCartIdByProductId(shoppingCartId, productId).toUni();
+	public double getCartTotal() {
+		return cartTotal;
+	}
 
-        Uni<Tuple4<ShoppingCart, Set<ShoppingCartItem>, ShoppingCartItem, Product>> responses = Uni.combine()
-                .all().unis(cart, cartItemsUni, item, productUni).asTuple();
+	public void setCartTotal(double cartTotal) {
+		this.cartTotal = cartTotal;
+	}
 
-        return Panache
-                .withTransaction(() -> responses
-                        .onItem().ifNotNull()
-                        .transform(entity -> {
+	public double getCartItemPromoSavings() {
+		return cartItemPromoSavings;
+	}
 
-                            if (entity.getItem1() == null || entity.getItem4() == null
-                                    || entity.getItem2() == null) {
-                                return null;
-                            }
+	public void setCartItemPromoSavings(double cartItemPromoSavings) {
+		this.cartItemPromoSavings = cartItemPromoSavings;
+	}
 
-                            if (entity.getItem3() == null) {
-                                ShoppingCartItem cartItem = ShoppingCartItem.builder()
-                                        .cart(entity.getItem1())
-                                        .product(entity.getItem4())
-                                        .quantity(1)
-                                        .build();
-                                entity.getItem2().add(cartItem);
-                            } else {
-                                entity.getItem3().quantity++;
-                            }
-                            entity.getItem1().calculateCartTotal();
-                            return entity.getItem1();
-                        }));
-    }
+	public double getShippingPromoSavings() {
+		return shippingPromoSavings;
+	}
 
+	public void setShippingPromoSavings(double shippingPromoSavings) {
+		this.shippingPromoSavings = shippingPromoSavings;
+	}
 
-    public static Uni<ShoppingCart> deleteProductFromShoppingCart(Long shoppingCartId, Long productId) {
-
-        Uni<ShoppingCart> cart = findById(shoppingCartId);
-        Uni<Set<ShoppingCartItem>> cartItemsUni = cart
-                .chain(shoppingCart -> Mutiny.fetch(shoppingCart.cartItems)).onFailure().recoverWithNull();
-
-        Uni<Product> productUni = Product.findByProductId(productId);
-        Uni<ShoppingCartItem> item = ShoppingCartItem.findByCartIdByProductId(shoppingCartId, productId).toUni();
-
-        Uni<Tuple4<ShoppingCart, Set<ShoppingCartItem>, ShoppingCartItem, Product>> responses = Uni.combine()
-                .all().unis(cart, cartItemsUni, item, productUni).asTuple();
-
-        return Panache
-                .withTransaction(() -> responses
-                        .onItem().ifNotNull()
-                        .transform(entity -> {
-                            if (entity.getItem1() == null || entity.getItem4() == null
-                                    || entity.getItem3() == null) {
-                                return null;
-                            }
-                            entity.getItem3().quantity--;
-                            if (entity.getItem3().quantity == 0) {
-                                entity.getItem2().remove(entity.getItem3());
-                            }
-                            entity.getItem1().calculateCartTotal();
-                            return entity.getItem1();
-                        }));
-
-
-    }
-
-    public String toString() {
-        return this.getClass().getSimpleName() + "<" + this.id + ">";
-    }
+	@Override
+	public String toString() {
+		return "ShoppingCart [cartItemTotal=" + cartItemTotal
+				+ ", cartItemPromoSavings=" + cartItemPromoSavings
+				+ ", shippingTotal=" + shippingTotal
+				+ ", shippingPromoSavings=" + shippingPromoSavings
+				+ ", cartTotal=" + cartTotal + ", shoppingCartItemList="
+				+ shoppingCartItemList + "]";
+	}
 }
