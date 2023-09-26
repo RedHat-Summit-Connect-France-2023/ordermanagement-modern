@@ -81,8 +81,6 @@ quarkus:
       "inventory":
         packages: io.ordermanagement.inventory.model
         datasource: ordermgmt-db
-        database:
-          generation: drop-and-create
         sql-load-script: products.sql
     jaeger:
       endpoint: http://localhost:14682/api/traces
