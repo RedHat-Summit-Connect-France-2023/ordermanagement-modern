@@ -23,6 +23,8 @@ import org.jboss.logging.Logger;
 
 import io.opentracing.Tracer;
 import io.ordermanagement.inventory.model.Product;
+import io.ordermanagement.inventory.model.Pseudo;
+import io.ordermanagement.inventory.repository.ProductRepository;
 import io.ordermanagement.inventory.service.IProductService;
 import io.quarkus.panache.common.Page;
 import io.quarkus.panache.common.Sort;
@@ -38,6 +40,9 @@ public class ProductController {
 	
 	@Inject
 	IProductService productService;
+
+	@Inject
+	ProductRepository productRepository;
 
 	@Inject
     MeterRegistry registry;
@@ -92,21 +97,23 @@ public class ProductController {
 	@POST
     @Transactional
     public Response create(Product product) {
-		registry.counter("product_createProduct_counter", Tags.of("productName", product.getName())).increment();
+		//registry.counter("product_createProduct_counter", Tags.of("productName", product.getName())).increment();
 		Product p = productService.findById(product.getItemId());
 		if (p == null) {
-			product.persist();
-		} else {
-			p.setCategory(product.getCategory());
-			p.setDescription(product.getDescription());
-			p.setLink(product.getLink());
-			p.setLocation(product.getLocation());
-			p.setName(product.getName());
-			p.setPrice(product.getPrice());
-			p.setQuantity(product.getQuantity());
-		}
+			product.persist();	
+		 } else {
+		 	p.setCategory(product.getCategory());
+		 	p.setDescription(product.getDescription());
+		 	p.setLink(product.getLink());
+		 	p.setLocation(product.getLocation());
+		 	p.setName(product.getName());
+		 	p.setPrice(product.getPrice());
+		 	p.setQuantity(product.getQuantity());
+		 }
        
-        return Response.created(URI.create("/products/" + product.getItemId())).build();
+        //return Response.created(URI.create("/products/" + product.getItemId())).build();
+		return  Response.status(200).entity((product.getItemId()).toString()).build();
+
     }
 
 

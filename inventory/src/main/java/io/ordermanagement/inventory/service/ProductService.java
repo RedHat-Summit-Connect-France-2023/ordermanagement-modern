@@ -14,7 +14,6 @@ import io.opentracing.Span;
 import io.opentracing.Tracer;
 import io.ordermanagement.inventory.model.Product;
 import io.ordermanagement.inventory.repository.ProductRepository;
-import io.quarkus.hibernate.orm.PersistenceUnit;
 import io.quarkus.panache.common.Page;
 import io.quarkus.panache.common.Sort;
 
