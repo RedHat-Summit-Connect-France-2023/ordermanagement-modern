@@ -71,7 +71,7 @@ public class PseudoController {
 	@Produces({ MediaType.APPLICATION_JSON })
 	public Response findAll(@QueryParam("sort") String sortString,
             @QueryParam("page") @DefaultValue("0") int pageIndex,
-            @QueryParam("size") @DefaultValue("20") int pageSize) {
+            @QueryParam("size") @DefaultValue("100") int pageSize) {
 		Page page = Page.of(pageIndex, pageSize);
         Sort sort = getSortFromQuery(sortString);
         return Response.ok(pseudoService.findAll(page, sort)).build();
