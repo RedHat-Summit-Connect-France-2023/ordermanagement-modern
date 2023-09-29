@@ -7,6 +7,7 @@ import java.util.List;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
+import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.DefaultValue;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.POST;
@@ -109,19 +110,23 @@ public class ProductController {
         return Response.created(URI.create("/products/" + product.getItemId())).build();
     }
 
-	@PUT
-	@Path("{productId}/{quantiy}")
-	@Produces({ MediaType.APPLICATION_JSON })
+	@POST
+	@Path("/{productId}")
+	@Consumes({ MediaType.TEXT_PLAIN })
+	@Produces({ MediaType.TEXT_PLAIN })
     @Transactional
-    public Response updateQuantiy(@QueryParam("productId") Integer productId, @PathParam("quantity") Integer quantity) {
+    public Response updateQuantiy(@PathParam("productId") Integer productId, @QueryParam("requestedQuantity") Integer requestedQuantity) {
 		String message;
 		registry.counter("product_updateQuantity_counter", Tags.of("productId", productId+"")).increment();
 		Product p = productService.findById(productId);
-		if (p.getQuantity() < quantity) {
-			 message = "Only "+p.getQuantity()+"items left";
+		if (p.getQuantity() < requestedQuantity) {
+			 message = "Please update the desired quantity, only "+p.getQuantity()+" items left";
+			 return Response.ok(message).build();
+
 		} else {
-        	message = "Quantiy updated for product "+productId;
-			p.setQuantity(quantity); 
+			int newQuantity = p.getQuantity() - requestedQuantity;
+			p.setQuantity(newQuantity); 
+			message = "Quantiy updated to "+p.getQuantity()+ " for product "+productId;
 		}
 		return Response.ok(message).build();
     }

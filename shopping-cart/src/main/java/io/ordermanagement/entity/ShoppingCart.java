@@ -9,6 +9,7 @@ import io.smallrye.mutiny.tuples.Tuple4;
 import org.hibernate.reactive.mutiny.Mutiny;
 
 import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -18,6 +19,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.NamedQueries;
 import jakarta.persistence.NamedQuery;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 import jakarta.persistence.NamedQueries;
 
 
@@ -32,24 +34,43 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-
+@Entity
+@Table(name = "shopping_cart")
 public class ShoppingCart{
 
 	private static final long serialVersionUID = -1108043957592113528L;
 
+    @Id
+    private String customerName;
+
+    @Column
 	private double cartItemTotal;
 
+    @Column
 	private double cartItemPromoSavings;
 	
+    @Column
 	private double shippingTotal;
 	
+    @Column
 	private double shippingPromoSavings;
 	
+    @Column
 	private double cartTotal;
 			
 	private List<ShoppingCartItem> shoppingCartItemList = new ArrayList<ShoppingCartItem>();
 
-	public ShoppingCart() {
+    
+
+	public String getCustomerName() {
+        return customerName;
+    }
+
+    public void setCustomerName(String customerName) {
+        this.customerName = customerName;
+    }
+
+    public ShoppingCart() {
 		
 	}
 	
@@ -129,13 +150,12 @@ public class ShoppingCart{
 		this.shippingPromoSavings = shippingPromoSavings;
 	}
 
-	@Override
-	public String toString() {
-		return "ShoppingCart [cartItemTotal=" + cartItemTotal
-				+ ", cartItemPromoSavings=" + cartItemPromoSavings
-				+ ", shippingTotal=" + shippingTotal
-				+ ", shippingPromoSavings=" + shippingPromoSavings
-				+ ", cartTotal=" + cartTotal + ", shoppingCartItemList="
-				+ shoppingCartItemList + "]";
-	}
+    @Override
+    public String toString() {
+        return "ShoppingCart [cartItemTotal=" + cartItemTotal + ", cartItemPromoSavings=" + cartItemPromoSavings
+                + ", shippingTotal=" + shippingTotal + ", shippingPromoSavings=" + shippingPromoSavings + ", cartTotal="
+                + cartTotal + ", shoppingCartItemList=" + shoppingCartItemList + ", customerName=" + customerName + "]";
+    }
+
+
 }

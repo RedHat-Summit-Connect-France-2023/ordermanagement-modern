@@ -1,93 +1,90 @@
 package io.ordermanagement.entity;
 
 
-import io.quarkus.hibernate.reactive.panache.Panache;
-import io.quarkus.hibernate.reactive.panache.PanacheEntityBase;
-import io.quarkus.panache.common.Sort;
-import io.smallrye.mutiny.Uni;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.NoArgsConstructor;
 
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
+public class Product  {
+	
+	private Integer itemId;
+	
+	private String name;
+	
+	private String description;
 
-import jakarta.json.bind.annotation.JsonbDateFormat;
-import jakarta.persistence.Cacheable;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import java.time.Duration;
-import java.time.ZonedDateTime;
-import java.util.Collections;
-import java.util.List;
+	private String location;
 
-@Entity
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder
-@Cacheable
-public class Product extends PanacheEntityBase {
+	private Integer pseudoId;
+	
+    private int quantity;
+    private String link;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public Long id;
+    private double price;
 
-    public String title;
-    public String description;
+    private String category;
+	
+	public String getCategory() {
+		return category;
+	}
+	public void setCategory(String category) {
+		this.category = category;
+	}
+	public Integer getItemId() {
+		return itemId;
+	}
+	public void setItemId(Integer itemId) {
+		this.itemId = itemId;
+	}
 
-    @JsonbDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'")
-    @CreationTimestamp
-    public ZonedDateTime createdAt;
+	public Integer getPseudoId() {
+		return pseudoId;
+	}
+	public void setPseudoId(Integer psuedoId) {
+		this.pseudoId = psuedoId;
+	}
+	
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public String getDescription() {
+		return description;
+	}
+	public void setDescription(String description) {
+		this.description = description;
+	}
+	public double getPrice() {
+		return price;
+	}
+	public void setPrice(double price) {
+		this.price = price;
+	}
+	public String getLocation() {
+		return location;
+	}
+	public void setLocation(String location) {
+		this.location = location;
+	}
+	public int getQuantity() {
+		return quantity;
+	}
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
+	}
+	public String getLink() {
+		return link;
+	}
+	public void setLink(String link) {
+		this.link = link;
+	}
+	
+	@Override
+	public String toString() {
+		return "Product [itemId=" + itemId + ", name=" + name + ", description=" + description + ", location="
+				+ location + ", pseudoId=" + pseudoId + ", quantity=" + quantity + ", link=" + link + ", price=" + price
+				+ ", category=" + category + "]";
+	}
 
-    @JsonbDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'")
-    @UpdateTimestamp
-    public ZonedDateTime updatedAt;
 
-    public static Uni<Product> findByProductId(Long id) {
-        return findById(id);
-    }
-
-    public static Uni<Product> updateProduct(Long id, Product product) {
-        return Panache
-                .withTransaction(() -> findByProductId(id)
-                        .onItem().ifNotNull()
-                        .transform(entity -> {
-                            entity.description = product.description;
-                            entity.title = product.title;
-                            return entity;
-                        })
-                        .onFailure().recoverWithNull());
-    }
-
-    public static Uni<Product> addProduct(Product product) {
-        return Panache
-                .withTransaction(product::persist)
-                .replaceWith(product)
-                .ifNoItem()
-                .after(Duration.ofMillis(10000))
-                .fail()
-                .onFailure()
-                .transform(t -> new IllegalStateException(t));
-    }
-
-    public static Uni<List<Product>> getAllProducts() {
-        return Product
-                .listAll(Sort.by("createdAt"))
-                .ifNoItem()
-                .after(Duration.ofMillis(10000))
-                .fail()
-                .onFailure()
-                .recoverWithUni(Uni.createFrom().<List<PanacheEntityBase>>item(Collections.EMPTY_LIST));
-
-    }
-
-    public static Uni<Boolean> deleteProduct(Long id) {
-        return Panache.withTransaction(() -> deleteById(id));
-    }
-
-    public String toString() {
-        return this.getClass().getSimpleName() + "<" + this.id + ">";
-    }
+	
 }

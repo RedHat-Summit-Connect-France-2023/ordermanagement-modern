@@ -20,6 +20,7 @@ import jakarta.persistence.Index;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import java.math.BigDecimal;
+import java.util.List;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -34,9 +35,7 @@ import jakarta.persistence.NamedQueries;
 @Builder
 @Cacheable
 @Getter
-@Table(indexes = {
-        @Index(name = "shopping_cart_item_cart_product_index", columnList = "cart_id, product_id"),
-})
+@Table(name = "shopping_cart_item")
 public class ShoppingCartItem extends PanacheEntityBase {
 
     @Id
@@ -63,10 +62,6 @@ public class ShoppingCartItem extends PanacheEntityBase {
     @OnDelete(action = OnDeleteAction.CASCADE)
     public Product product;
 
-
-    public static Multi<ShoppingCartItem> findByCartIdByProductId(Long cartId, Long productId) {
-        return stream("cart.id = ?1 and product.id = ?2", cartId, productId);
-    }
 
     
     public String toString() {
