@@ -86,7 +86,7 @@ public class ProductController {
 	@Produces({ MediaType.APPLICATION_JSON })
 	public Response findAll(@QueryParam("sort") String sortString,
             @QueryParam("page") @DefaultValue("0") int pageIndex,
-            @QueryParam("size") @DefaultValue("20") int pageSize) {
+            @QueryParam("size") @DefaultValue("100") int pageSize) {
 		registry.counter("product_findAllProduct_counter", Tags.of("products", "products")).increment();
 		
 		Page page = Page.of(pageIndex, pageSize);
