@@ -34,16 +34,17 @@ quarkus:
       "inventory":
         packages: io.ordermanagement.inventory.model
         datasource: ordermgmt-db
+        database:
         sql-load-script: products.sql
     kubernetes-client:
       trust-certs: true
-    # openshift:
-    #   route:
-    #     expose: true
-    #     target-port: http
-    #     tls:
-    #       termination: Edge
-    #       insecure-edge-termination-policy: Redirect
+    openshift:
+      route:
+        expose: true
+        target-port: http
+        tls:
+          termination: Edge
+          insecure-edge-termination-policy: Redirect
     jaeger:
       endpoint: https://localhost:14682/api/traces
       sampler-type: const
