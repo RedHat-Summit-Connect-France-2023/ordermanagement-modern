@@ -22,7 +22,7 @@ public class OrderRepository implements PanacheRepositoryBase<Order, Long> {
 	@Inject
 	Tracer tracer;
 	
-	public Order findById(String id) {
+	public Order findById(long id) {
 		Span childSpan = tracer.buildSpan("findById").start();
 		childSpan.setTag("layer", "Repository");
 		logger.debug("Entering OrderRepository.findById()");

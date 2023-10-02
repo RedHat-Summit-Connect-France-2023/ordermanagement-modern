@@ -12,6 +12,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 import io.quarkus.hibernate.orm.panache.PanacheEntity;
 import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
@@ -21,23 +22,36 @@ import io.quarkus.runtime.annotations.RegisterForReflection;
 @RegisterForReflection
 public class Order extends PanacheEntityBase{
 
-
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@SequenceGenerator(
+		name = "ordersSequence",
+		sequenceName = "orders_id_seq",
+		allocationSize = 1,
+		initialValue = 7)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ordersSequence") 
 	private long orderId;
+
+	@Column
+	private long customerId;
 	
 	@Column(length = 255)
 	private String customerName;
+
 	@Column(length = 255)
 	private String customerEmail;
+
 	@Column
 	private double orderValue;
+
 	@Column
 	private double retailPrice;
+
 	@Column
 	private double discount;
+
 	@Column
 	private double shippingFee;
+
 	@Column
 	private double shippingDiscount;
 
@@ -52,9 +66,6 @@ public class Order extends PanacheEntityBase{
 		return orderId;
 	}
 
-	public void setOrderId(long orderId) {
-		this.orderId = orderId;
-	}
 
 	public String getCustomerName() {
 		return customerName;
@@ -119,19 +130,20 @@ public class Order extends PanacheEntityBase{
 	public List<OrderItem> getItemList() {
 		return itemList;
 	}
+	public long getCustomerId() {
+		return customerId;
+	}
 
+	public void setCustomerId(long customerId) {
+		this.customerId = customerId;
+	}
+	
 	@Override
 	public String toString() {
-		return "Order [orderId=" + orderId
-				+ ", customerName=" + customerName
-				+ ", customerEmail=" + customerEmail
-				+ ", orderValue=" + orderValue
-				+ ", retailPrice=" + retailPrice
-				+ ", discount=" + discount
-				+ ", shippingFee=" + shippingFee
-				+ ", shippingDiscount=" + shippingDiscount
-				+ ", itemList=" + itemList 
-				+ "]";
+		return "Order [orderId=" + orderId + ", customerId=" + customerId + ", customerName=" + customerName
+				+ ", customerEmail=" + customerEmail + ", orderValue=" + orderValue + ", retailPrice=" + retailPrice
+				+ ", discount=" + discount + ", shippingFee=" + shippingFee + ", shippingDiscount=" + shippingDiscount
+				+ ", itemList=" + itemList + "]";
 	}
 
 }

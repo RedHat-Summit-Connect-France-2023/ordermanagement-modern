@@ -8,7 +8,9 @@ import io.quarkus.panache.common.Sort;
 
 public interface IOrderService {
 	
-	public Order findById(String id);
+	public Order findById(long id);
 	
 	public List<Order> findAll(Page page, Sort sort);
+
+	public void delete(Order order);
 }

@@ -35,6 +35,10 @@
       <version>${lombok.version}</version>
   </dependency>
   <dependency>
+    <groupId>io.quarkus</groupId>
+    <artifactId>quarkus-smallrye-opentracing</artifactId>
+  </dependency>
+  <dependency>
       <groupId>io.quarkus</groupId>
       <artifactId>quarkus-resteasy-reactive-jsonb</artifactId>
   </dependency>

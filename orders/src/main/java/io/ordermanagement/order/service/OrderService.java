@@ -33,10 +33,10 @@ public class OrderService implements IOrderService {
 	 * @param id The {@link Product} {@code id}
 	 * @return The {@link Product} with the supplied {@code id}, {@literal null} if no {@link Product} is found. 
 	 */
-	public Order findById(String id) {
+	public Order findById(long id) {
 		Span childSpan = tracer.buildSpan("findById").start();
 		childSpan.setTag("layer", "Service");
-		logger.debug("Entering ProductService.findById()");
+		logger.debug("Entering OrderService.findById()");
 		Order o = repository.findById(id);
 		childSpan.finish();
 		return o;
@@ -46,10 +46,16 @@ public class OrderService implements IOrderService {
 	public List<Order> findAll(Page page, Sort sort) {
 		Span childSpan = tracer.buildSpan("findAll").start();
 		childSpan.setTag("layer", "Service");
-		logger.debug("Entering ProductService.findAll()");
+		logger.debug("Entering OrderService.findAll()");
 		List<Order> o = repository.findAll(page, sort);
 		childSpan.finish();
 		return o;
+	}
+
+	@Override
+	public void delete(Order order) {
+		logger.debug("Entering OrderService.delete()");
+		repository.delete(order);
 	}
 	
 	

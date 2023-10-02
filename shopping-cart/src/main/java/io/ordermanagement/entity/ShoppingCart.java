@@ -2,6 +2,7 @@ package io.ordermanagement.entity;
 
 import io.quarkus.hibernate.reactive.panache.Panache;
 import io.quarkus.hibernate.reactive.panache.PanacheEntityBase;
+import io.quarkus.runtime.annotations.RegisterForReflection;
 import io.smallrye.mutiny.Multi;
 import io.smallrye.mutiny.Uni;
 import io.smallrye.mutiny.tuples.Tuple4;
@@ -29,19 +30,18 @@ import lombok.NoArgsConstructor;
 
 
 
-import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 @Entity
 @Table(name = "shopping_cart")
-public class ShoppingCart{
+@RegisterForReflection
+public class ShoppingCart extends PanacheEntityBase{
 
 	private static final long serialVersionUID = -1108043957592113528L;
 
     @Id
-    private String customerName;
+	private long customerId;
 
     @Column
 	private double cartItemTotal;

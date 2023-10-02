@@ -7,6 +7,7 @@ import java.util.List;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
+import jakarta.ws.rs.DELETE;
 import jakarta.ws.rs.DefaultValue;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.POST;
@@ -42,14 +43,14 @@ public class OrderController {
     @Path("/{id}")
     @Produces({ MediaType.APPLICATION_JSON })
 	@Traced
-    public Order getById(@PathParam("id") String id) {
+    public Response getById(@PathParam("id") long id) {
 		Order o;
 		logger.debug("Entering OrderController.getById()");
 		o = orderService.findById(id);
 		if (o == null) {
 			logger.error("Order not found");
 		}
-		return o;    
+		return Response.ok(o).build();    
     }
 	
 	@GET
@@ -65,10 +66,29 @@ public class OrderController {
 	@POST
     @Transactional
     public Response create(Order order) {
-        order.persist();
+		Order o = orderService.findById(order.getOrderId());
+		if (o == null) {
+			order.persist();
+		}else {
+			o.setCustomerEmail(order.getCustomerEmail());
+			o.setCustomerName(order.getCustomerName());
+			o.setDiscount(order.getDiscount());
+			o.setItemList(order.getItemList());
+			o.setOrderValue(order.getOrderValue());
+			o.setRetailPrice(order.getRetailPrice());
+			o.setShippingDiscount(order.getShippingDiscount());
+			o.setShippingFee(order.getShippingFee());
+		}
         return Response.created(URI.create("/orders/" + order.getOrderId())).build();
     }
 
+	@DELETE
+	@Transactional
+	public Response delete(Order order){
+		orderService.delete(order);
+		String message = "Order "+order.getOrderId()+ " deleted ";
+		return Response.ok(message).build();
+	}
 	/**
 	 * This method tries to mimic the behavior of Spring MVC's @EnableSpringDataWebSupport annotation when it comes to the sort parameter.
 	 * @param sortString The string containing the sort query to be used. Must have the "field,asc/desc" format or the second part of the query will be ignored.

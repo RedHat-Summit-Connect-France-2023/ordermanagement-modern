@@ -60,9 +60,6 @@ public class Product extends PanacheEntityBase {
 	public Integer getItemId() {
 		return itemId;
 	}
-	public void setItemId(Integer itemId) {
-		this.itemId = itemId;
-	}
 
 	public Integer getPseudoId() {
 		return pseudoId;
