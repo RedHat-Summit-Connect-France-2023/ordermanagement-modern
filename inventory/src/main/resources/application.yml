@@ -18,11 +18,11 @@ quarkus:
         headers: accept, authorization, content-type, x-requested-with, X-Custom
         methods: GET, OPTIONS, POST
         access-control-allow-credentials: true
-    kubernetes-config:
-      enabled: true
-      secrets: 
-        ~: "ordermgmt-config"
-        enabled: true
+   # kubernetes-config:
+   #   enabled: true
+   #   secrets: 
+   #     ~: "ordermgmt-config"
+   #     enabled: true
     datasource:
       ordermgmt-db:
         db-kind: postgresql
@@ -37,13 +37,13 @@ quarkus:
         sql-load-script: products.sql
     kubernetes-client:
       trust-certs: true
-    openshift:
-      route:
-        expose: true
-        target-port: http
-        tls:
-          termination: Edge
-          insecure-edge-termination-policy: Redirect
+   # openshift:
+   #   route:
+   #     expose: true
+   #     target-port: http
+   #     tls:
+   #       termination: Edge
+   #      insecure-edge-termination-policy: Redirect
     jaeger:
       endpoint: https://localhost:14682/api/traces
       sampler-type: const
