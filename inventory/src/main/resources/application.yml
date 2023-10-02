@@ -34,7 +34,6 @@ quarkus:
       "inventory":
         packages: io.ordermanagement.inventory.model
         datasource: ordermgmt-db
-        database:
         sql-load-script: products.sql
     kubernetes-client:
       trust-certs: true
